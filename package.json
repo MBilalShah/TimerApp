@@ -24,6 +24,7 @@
     "@ionic/angular": "^5.5.2",
     "@ionic/storage": "^2.3.1",
     "ionic-angular": "^3.9.10",
+    "ios-deploy": "^1.11.4",
     "ng-circle-progress": "^1.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
@@ -40,7 +41,15 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "com.testfairy.cordova-plugin": "^2.39.0",
+    "cordova-ios": "^6.2.0",
+    "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-ionic-keyboard": "^2.0.5",
+    "cordova-plugin-ionic-webview": "^4.0.0",
     "cordova-plugin-screen-orientation": "^3.0.2",
+    "cordova-plugin-splashscreen": "5.0.2",
+    "cordova-plugin-statusbar": "2.4.2",
+    "cordova-plugin-whitelist": "1.3.3",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.2.0",
@@ -57,7 +66,16 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-screen-orientation": {}
-    }
+      "cordova-plugin-screen-orientation": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "ios"
+    ]
   }
 }

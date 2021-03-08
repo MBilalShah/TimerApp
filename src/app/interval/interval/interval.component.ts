@@ -24,6 +24,7 @@ export class IntervalComponent implements OnInit {
     const modal = await this.modalController.create({
       component: IntervalFormComponent,
       cssClass: 'my-custom-class',
+
     });
 
     await modal.present();
@@ -32,6 +33,26 @@ export class IntervalComponent implements OnInit {
     console.log(data);
     if(!data){return}
     this.intervals.push(data);
+
+    this.storage.set('intervals', this.intervals)
+  }
+
+  async editInterval(index){
+    const modal = await this.modalController.create({
+      component: IntervalFormComponent,
+      cssClass: 'my-custom-class',
+      componentProps:{
+        'editMode':true,
+        'interval':this.intervals[index]
+      }
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    console.log(data);
+    if(!data){return}
+    this.intervals[index]=data;
 
     this.storage.set('intervals', this.intervals)
   }
