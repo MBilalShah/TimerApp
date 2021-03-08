@@ -1,0 +1,20 @@
+<!-- <h1 class="heading">Interval Modes</h1> -->
+
+
+<ion-list>
+  <ion-list-header class="black">
+    Interval Modes
+    <ion-icon (click)='addInterval()' color="primary" name="add-outline"></ion-icon>
+  </ion-list-header>
+  <ion-item *ngFor='let interval of intervals;let index=index'>
+    <ion-label (click)='openTimer(index)'>{{interval.title}}</ion-label>
+    <ion-icon color='primary' name="pencil-outline"></ion-icon>
+    <ion-icon color='primary' (click)='deleteInterval(index)' name="trash-outline"></ion-icon>
+  </ion-item>
+
+
+
+
+
+
+</ion-list>

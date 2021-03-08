@@ -1,0 +1,67 @@
+<ng-container *ngIf='!is_landscape'>
+
+  <ion-datetime style='display: none;' value='00:00:00' (ionChange)='onTimeChange($event)' #picker display-format="mm:ss" picker-format="mm:ss"
+
+  ></ion-datetime>
+
+
+  <circle-progress class="countdown-text" (click)='picker.open()'
+  [percent]="percentage"
+  [maxPercent]="100"
+  [radius]="100"
+  [showTitle]="false"
+  [showSubtitle]="true"
+  [subtitle]="timer * 1000 | date:'mm:ss':'UTC'"
+  [subtitleFontSize]="'80px'"
+  [showUnits]="false"
+  [outerStrokeWidth]="8"
+  [outerStrokeColor]="'#FB331A'"
+  [showZeroOuterStroke]="false"
+  [innerStrokeWidth]="0"
+  [subtitleColor]='"#FB331A"'
+  ></circle-progress>
+
+
+  <div  *ngIf='stopwatchService.isResetted' class="container">
+    <ion-button [color]='type===0? "primary":"secondary"' (click)='type=0' class="half-width" size='large'>COUNT DOWN</ion-button>
+    <ion-button [color]='type===1? "primary":"secondary"' (click)='type=1' class="half-width" size='large'>COUNT UP</ion-button>
+  </div>
+
+
+  <ion-button *ngIf='stopwatchService.isResetted' expand='block'(click)='startTimer()' >START
+    <ion-ripple-effect type="bounded"></ion-ripple-effect>
+  </ion-button>
+
+  <ion-button *ngIf='stopwatchService.isStarted' expand='block'(click)='stopTimer()' >STOP
+    <ion-ripple-effect type="bounded"></ion-ripple-effect>
+  </ion-button>
+
+
+  <div *ngIf='stopwatchService.isStopped'>
+    <ion-button class="half-width" color='secondary' size='large'  (click)='resume()'>RESUME
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </ion-button>
+
+    <ion-button class="half-width" color='primary' size='large' (click)='reset()'>RESET
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </ion-button>
+  </div>
+
+
+    <!-- <circle-progress
+    [percent]="85"
+    [radius]="100"
+    [outerStrokeWidth]="8"
+    [innerStrokeWidth]="0"
+    [outerStrokeColor]="'#FB331A'"
+    [innerStrokeColor]="'#C7E596'"
+    [animation]="true"
+    [animationDuration]="300"
+  ></circle-progress> -->
+
+</ng-container>
+
+<ng-container  *ngIf='is_landscape'>
+  <p class='stop-watch-time landscape'><span class="lapno">{{type==0?'DN':'UP'}}</span>{{timer * 1000 | date:'mm:ss':'UTC'}}</p>
+
+</ng-container>

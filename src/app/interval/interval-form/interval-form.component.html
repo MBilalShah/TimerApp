@@ -1,0 +1,46 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismissModal()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>Set Interval</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <form [formGroup]='form'>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>
+          Set Interval
+        </ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Workout Name:</ion-label>
+        <ion-input  formControlName='title'></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Workout Time:</ion-label>
+        <ion-datetime formControlName='workoutTime' value='00:00:00'  #picker display-format="mm:ss" picker-format="mm:ss"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Rest Time:</ion-label>
+        <ion-datetime formControlName='restTime' value='00:00:00'  #picker display-format="mm:ss" picker-format="mm:ss"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label> No. of Rounds:</ion-label>
+        <ion-input formControlName='rounds' type='number'></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+  </form>
+
+
+</ion-content>
