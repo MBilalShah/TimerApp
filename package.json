@@ -20,6 +20,8 @@
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
     "@ionic-native/core": "^5.31.1",
+    "@ionic-native/media": "^5.31.1",
+    "@ionic-native/native-audio": "^5.31.1",
     "@ionic-native/screen-orientation": "^5.31.1",
     "@ionic/angular": "^5.5.2",
     "@ionic/storage": "^2.3.1",
@@ -28,6 +30,7 @@
     "ng-circle-progress": "^1.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "uuid": "^8.3.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
@@ -41,11 +44,13 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
-    "com.testfairy.cordova-plugin": "^2.39.0",
     "cordova-ios": "^6.2.0",
     "cordova-plugin-device": "2.0.2",
+    "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^4.0.0",
+    "cordova-plugin-media": "^5.0.3",
+    "cordova-plugin-nativeaudio": "^3.0.9",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
@@ -72,7 +77,8 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-media": {}
     },
     "platforms": [
       "ios"

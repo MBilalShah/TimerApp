@@ -1,45 +1,29 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header> -->
+
 
 <ion-content [fullscreen]="true">
-  <!-- <circle-progress
-  [percent]="85"
-  [radius]="100"
-  [outerStrokeWidth]="8"
-  [innerStrokeWidth]="0"
-  [outerStrokeColor]="'#FB331A'"
-  [innerStrokeColor]="'#C7E596'"
-  [animation]="true"
-  [animationDuration]="300"
-></circle-progress> -->
 
-<ion-router-outlet></ion-router-outlet>
+  <ion-router-outlet></ion-router-outlet>
 
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
+<ion-tabs >
+  <ion-tab-bar color='secondary' slot="bottom" [class.tabs-item-hide]='is_landscape'>
     <ion-tab-button (click)='goTo("clock")' tab="clock">
-      <ion-icon [color]="router.url.includes('clock')?'primary':'secondary'" name="alarm-outline"></ion-icon>
-      <ion-label [color]="router.url.includes('clock')?'primary':'secondary'">Clock</ion-label>
+      <ion-icon [color]="router.url.includes('clock')?'primary':'tertiary'" name="alarm-outline"></ion-icon>
+      <ion-label [color]="router.url.includes('clock')?'primary':'tertiary'">Clock</ion-label>
     </ion-tab-button>
 
     <ion-tab-button (click)='goTo("stopwatch")' tab="stopwatch">
-      <ion-icon [color]="router.url.includes('stopwatch')?'primary':'secondary'" name="stopwatch-outline"></ion-icon>
-      <ion-label [color]="router.url.includes('stopwatch')?'primary':'secondary'">Stopwatch</ion-label>
+      <ion-icon [color]="router.url.includes('stopwatch')?'primary':'tertiary'" name="stopwatch-outline"></ion-icon>
+      <ion-label [color]="router.url.includes('stopwatch')?'primary':'tertiary'">Stopwatch</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="counter" (click)='goTo("counter")'>
-      <ion-icon [color]="router.url.includes('counter')?'primary':'secondary'" name="speedometer-outline"></ion-icon>
-      <ion-label [color]="router.url.includes('counter')?'primary':'secondary'">Counter</ion-label>
+      <ion-icon [color]="router.url.includes('counter')?'primary':'tertiary'" name="speedometer-outline"></ion-icon>
+      <ion-label [color]="router.url.includes('counter')?'primary':'tertiary'">Counter</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="interval" (click)='goTo("interval")'>
-      <ion-icon [color]="router.url.includes('interval')?'primary':'secondary'" name="infinite-outline"></ion-icon>
-      <ion-label [color]="router.url.includes('interval')?'primary':'secondary'">Interval</ion-label>
+      <ion-icon [color]="router.url.includes('interval')?'primary':'tertiary'" name="infinite-outline"></ion-icon>
+      <ion-label [color]="router.url.includes('interval')?'primary':'tertiary'">Interval</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

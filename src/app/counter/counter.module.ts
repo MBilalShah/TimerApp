@@ -8,6 +8,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { FormsModule } from '@angular/forms';
 
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
 @NgModule({
   declarations: [
     CounterComponent
@@ -29,6 +30,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
     }),
     FormsModule
   ],
-  providers:[ScreenOrientation]
+  providers:[ScreenOrientation
+  ]
 })
 export class CounterModule { }

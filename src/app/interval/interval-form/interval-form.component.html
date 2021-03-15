@@ -25,17 +25,18 @@
 
       <ion-item>
         <ion-label>Workout Time:</ion-label>
-        <ion-datetime formControlName='workoutTime' value='00:00:00'  #picker display-format="mm:ss" picker-format="mm:ss"></ion-datetime>
+        <ion-datetime formControlName='workoutTime' value='00:00:00' min='00:00:01' #picker display-format="mm:ss" picker-format="mm:ss"></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label>Rest Time:</ion-label>
-        <ion-datetime formControlName='restTime' value='00:00:00'  #picker display-format="mm:ss" picker-format="mm:ss"></ion-datetime>
+        <ion-datetime formControlName='restTime' value='00:00:00' min='00:00:01' #picker display-format="mm:ss" picker-format="mm:ss"></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label> No. of Rounds:</ion-label>
-        <ion-input formControlName='rounds' type='number'></ion-input>
+        <ion-input type="tel" formControlName='rounds' appNumbersOnly ></ion-input>
+        <!-- <ion-input formControlName='rounds' type="tel" pattern="[0-9]"></ion-input> -->
       </ion-item>
 
     </ion-list>

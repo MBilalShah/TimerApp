@@ -1,9 +1,18 @@
 .round{
-  font-size: 40px;
+  font-size: 50px;
   color: #FB331A;
 }
 
 .header{
-  font-size: 30px;
+  font-size: 45px;
   display: block;
+}
+ion-title{
+  span{
+    text-align: center;
+  }
+}
+
+.header{
+  text-align:center
 }

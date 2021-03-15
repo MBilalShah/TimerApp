@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy,ViewChild, ElementRef} from '@angular/core';
 import { StopwatchServiceService } from 'src/app/shared-module/services/stopwatch-service.service';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { IonContent, Platform } from '@ionic/angular';
+import { SaveStateService, ScreenEnum } from 'src/app/shared-module/services/save-state.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-stopwatch',
   templateUrl: './stopwatch.component.html',
@@ -8,9 +11,17 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 })
 export class StopwatchComponent implements OnInit {
 
-  constructor(public stopWatchService:StopwatchServiceService,private orientation:ScreenOrientation) { }
+  constructor(public stopWatchService:StopwatchServiceService,private orientation:ScreenOrientation,private saveStateService:SaveStateService,private platform:Platform) {
+    this.platform.pause.subscribe(data=>
+      this.saveState()
+      )
+   }
+   subscription:Subscription
 
   is_landscape:boolean=false;
+  laps:any[]=[]
+  @ViewChild('content') content:IonContent;
+
   onOrientationChange(){
     if(this.orientation.type === this.orientation.ORIENTATIONS.LANDSCAPE
       ||
@@ -30,6 +41,10 @@ this.is_landscape = false;
       }
   }
   ngOnInit() {
+
+    this.subscription=this.stopWatchService.timerListener.subscribe(timer=>{
+      this.saveState()
+    })
     this.onOrientationChange()
     this.orientation.onChange().subscribe(data=>{
       console.log('orientation changed',data,this.orientation.type)
@@ -37,7 +52,29 @@ this.is_landscape = false;
     })
 
   }
-  laps:any[]=[]
+  ionViewDidEnter(){
+    this.getState()
+  }
+  saveState(){
+    this.saveStateService.saveState(ScreenEnum.stopwatch,{
+      laps:this.laps,
+      timerVal:this.stopWatchService.timerVal
+    })
+  }
+
+  async getState(){
+    const data= await this.saveStateService.getState(ScreenEnum.stopwatch)
+if(data){
+    this.laps=data.laps
+    this.stopWatchService.timerVal=data.timerVal
+ } }
+
+  scrolltobottom(){
+    console.log(this.content)
+
+    this.content?this.content.scrollToBottom():null;
+  }
+
   startTimer(){
     this.stopWatchService.startTimer()
   }
@@ -45,18 +82,26 @@ this.is_landscape = false;
     this.stopWatchService.stopTimer()
   }
   lapTime(){
+    if(this.stopWatchService.isStarted){
     const now= this.stopWatchService.getTime()
     this.laps.push(now)
+    this.scrolltobottom()}
   }
   resume(){
     this.stopWatchService.resumeTimer()
   }
   reset(){
+
     this.stopWatchService.resetTimer()
     this.laps=[]
+    this.saveState()
   }
-  ngOnDestroy(){
+  ionViewDidLeave(){
+    // this.subscription.unsubscribe()
+    this.saveState()
     this.stopWatchService.stopTimer()
     this.stopWatchService.resetTimer()
+    this.laps=[]
+
   }
 }

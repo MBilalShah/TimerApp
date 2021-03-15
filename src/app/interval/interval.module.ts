@@ -11,6 +11,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { IntervalTimerComponent } from './interval-timer/interval-timer.component';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
+import { SharedModuleModule } from '../shared-module/shared-module.module';
+
 @NgModule({
   declarations: [
     IntervalComponent,
@@ -20,6 +23,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
     CommonModule,
     IntervalRoutingModule,
     IonicModule,
+    SharedModuleModule,
     ReactiveFormsModule,
     IonicStorageModule.forRoot({
       name: '__mydb',
@@ -37,7 +41,8 @@ driverOrder: ['indexeddb', 'sqlite', 'websql']
       renderOnClick: false
     }),
   ],providers:[
-    ScreenOrientation
+    ScreenOrientation,
+
   ]
 })
 export class IntervalModule { }

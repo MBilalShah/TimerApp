@@ -4,6 +4,8 @@ import { from } from 'rxjs';
 import { IntervalFormComponent } from '../interval-form/interval-form.component';
 import {Storage as storageClass} from '@ionic/storage'
 import { Router } from '@angular/router';
+import { generateId } from 'src/app/shared-module/helper';
+import { IntervalForm } from 'src/app/shared-module/Models/Interval.Model';
 @Component({
   selector: 'app-interval',
   templateUrl: './interval.component.html',
@@ -14,9 +16,12 @@ export class IntervalComponent implements OnInit {
   constructor(public modalController: ModalController,private storage:storageClass,private alertController:AlertController,private router:Router) { }
 
   intervals:any[]=[]
+
  async ngOnInit() {
 
     this.intervals = await this.storage.get('intervals') || []
+
+    console.log(JSON.stringify(this.intervals))
   }
 
 
@@ -32,6 +37,7 @@ export class IntervalComponent implements OnInit {
     const { data } = await modal.onWillDismiss();
     console.log(data);
     if(!data){return}
+    // data.id=generateId()
     this.intervals.push(data);
 
     this.storage.set('intervals', this.intervals)
@@ -51,6 +57,7 @@ export class IntervalComponent implements OnInit {
 
     const { data } = await modal.onWillDismiss();
     console.log(data);
+
     if(!data){return}
     this.intervals[index]=data;
 
@@ -80,8 +87,8 @@ export class IntervalComponent implements OnInit {
     await alert.present();
   }
 
-  openTimer(index){
-    this.router.navigate([`home/interval/interval-timer/${index}`])
+  openTimer(interval:IntervalForm){
+    this.router.navigate([`home/interval/interval-timer/${interval.id}`])
 
   }
 }

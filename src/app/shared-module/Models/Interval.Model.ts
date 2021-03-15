@@ -13,5 +13,6 @@ export interface IntervalForm{
   title:string;
   workoutTime:string;
   restTime:string;
-  rounds:number
+  rounds:number;
+  id:string;
 }

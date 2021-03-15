@@ -34,16 +34,17 @@
 .time{
   margin: auto;
   font-family: 'digital-7';
-  font-size: 90px;
+  font-size: 22vw;
   color: #F71C00;
 }
 
 .stop-watch-time{
   font-family: 'digital-7';
-  font-size: 143px;
+  font-size: 33vw;
   color: #F71C00;
   text-align: center;
   margin: 40px;
+  margin-top: 55px;
 }
 
 .countdown-text{
@@ -64,10 +65,57 @@ ion-fab-button{
 }
 
 .landscape{
-  margin:auto
+  margin:auto;
+  font-size:29vw;
 }
 
 .lapno{
   color: #2D92F8;
   margin-right: 30px;
+  // display: inline-flex;
+  // flex-direction: column;
+  // vertical-align: top;
+  // // font-size: 8vw;
+  // vertical-align: middle;
+  //   font-size: 7vw;
 }
+
+ion-button{
+  margin:0px 20px 20px 20px;
+}
+
+ion-fab{
+  margin-top:30px
+}
+// .picker-toolbar.sc-ion-picker-ios{
+//   border-bottom: 0px;
+// }
+// .picker-wrapper.sc-ion-picker-ios{
+//   background: #0000
+// }
+
+// .picker-above-heighlight.sc-ion-picker-ios, .picker-below-highlight.sc-ion-picker-ios{
+//   background:#000;
+//   border:none
+// }
+// .picker-opt{
+//   color:white
+// }
+// .picker-columns{
+//   position: relative;
+// }
+// .picker-columns::before{
+//   position: absolute;
+//   content: "mm ss";
+//   top: 54px;
+//   left: 0;
+//   color: #fff;
+//   right: 0;
+//   margin: auto;
+//   text-align: center;
+//   z-index: 99999;
+//   width: 100px;
+//   word-spacing: 16px;
+//   font-size: 20px;
+// }
+

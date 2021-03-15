@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { TimeshowPipe } from './pipes/timeshow.pipe';
+import { NumbersOnlyDirective } from './directives/numbers-only.directive';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TimeshowPipe, NumbersOnlyDirective],
   imports: [
     CommonModule,
     NgCircleProgressModule.forRoot({
@@ -19,6 +21,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       responsive: true,
       renderOnClick: false
     }),
-  ]
+  ],
+  exports:[TimeshowPipe,NumbersOnlyDirective]
 })
 export class SharedModuleModule { }

@@ -5,14 +5,14 @@
   ></ion-datetime>
 
 
-  <circle-progress class="countdown-text" (click)='picker.open()'
+  <circle-progress class="countdown-text" style="margin-top:20px"
   [percent]="percentage"
   [maxPercent]="100"
   [radius]="100"
   [showTitle]="false"
   [showSubtitle]="true"
   [subtitle]="timer * 1000 | date:'mm:ss':'UTC'"
-  [subtitleFontSize]="'80px'"
+  [subtitleFontSize]="'85px'"
   [showUnits]="false"
   [outerStrokeWidth]="8"
   [outerStrokeColor]="'#FB331A'"
@@ -22,22 +22,43 @@
   ></circle-progress>
 
 
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='picker.open();resetTimer(picker)'>
+      <ion-icon name="cog-outline" ></ion-icon>
+    </ion-fab-button>
+
+  </ion-fab>
+
   <div  *ngIf='stopwatchService.isResetted' class="container">
     <ion-button [color]='type===0? "primary":"secondary"' (click)='type=0' class="half-width" size='large'>COUNT DOWN</ion-button>
     <ion-button [color]='type===1? "primary":"secondary"' (click)='type=1' class="half-width" size='large'>COUNT UP</ion-button>
   </div>
 
 
-  <ion-button *ngIf='stopwatchService.isResetted' expand='block'(click)='startTimer()' >START
+  <ion-button *ngIf='stopwatchService.isResetted' size='large' [disabled]='!timer' expand='block'(click)='startTimer()' >START
+    <ion-ripple-effect  type="bounded"></ion-ripple-effect>
+  </ion-button>
+
+  <ion-button *ngIf='stopwatchService.isStarted' size='large' expand='block'(click)='stopTimer()' >STOP
     <ion-ripple-effect type="bounded"></ion-ripple-effect>
   </ion-button>
 
-  <ion-button *ngIf='stopwatchService.isStarted' expand='block'(click)='stopTimer()' >STOP
-    <ion-ripple-effect type="bounded"></ion-ripple-effect>
-  </ion-button>
 
 
   <div *ngIf='stopwatchService.isStopped'>
+
+    <ion-button color='secondary' size='large' expand='block' (click)='reset()'>RESET
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </ion-button>
+
+    <ion-button  color='primary' size='large' expand='block'  (click)='resume()'>RESUME
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </ion-button>
+
+
+  </div>
+
+  <!-- <div *ngIf='stopwatchService.isStopped'>
     <ion-button class="half-width" color='secondary' size='large'  (click)='resume()'>RESUME
       <ion-ripple-effect type="bounded"></ion-ripple-effect>
     </ion-button>
@@ -45,7 +66,7 @@
     <ion-button class="half-width" color='primary' size='large' (click)='reset()'>RESET
       <ion-ripple-effect type="bounded"></ion-ripple-effect>
     </ion-button>
-  </div>
+  </div> -->
 
 
     <!-- <circle-progress

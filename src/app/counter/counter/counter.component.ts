@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StopwatchServiceService } from 'src/app/shared-module/services/stopwatch-service.service';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+import { SaveStateService, ScreenEnum } from 'src/app/shared-module/services/save-state.service';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-counter',
   templateUrl: './counter.component.html',
@@ -9,8 +11,13 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 })
 export class CounterComponent implements OnInit {
 
-  constructor(public stopwatchService:StopwatchServiceService,private orientation:ScreenOrientation) { }
+  constructor(public stopwatchService:StopwatchServiceService,private orientation:ScreenOrientation,private saveStateService:SaveStateService,private platform:Platform) {
 
+    this.platform.pause.subscribe(data=>this.saveState())
+   }
+   playSound(){
+    this.stopwatchService.playSound('bell')
+   }
   timer:number=0;
 
 
@@ -24,6 +31,40 @@ export class CounterComponent implements OnInit {
   subscription:Subscription
 
   is_landscape:boolean=false;
+
+  ionViewDidEnter(){
+    this.getState()
+  }
+
+
+  saveState(){
+
+      this.saveStateService.saveState(ScreenEnum.counter,{
+        timer:this.timer,
+        type:this.type,
+        hour:this.hour,
+        minutes:this.minutes,
+        seconds:this.seconds,
+        percentage:this.percentage,
+      })
+
+  }
+
+  async getState(){
+   const data= await this.saveStateService.getState(ScreenEnum.counter)
+   if(data){
+     this.timer=data.timer
+     if(this.timer){
+     this.stopwatchService.timerVal=-1}
+   this.type=data.type;
+   this.hour=data.hour;
+   this.minutes=data.minutes;
+   this.seconds=data.seconds;
+   this.percentage=data.percentage;
+  this.listenToTimer(this.timer)
+  }}
+
+
   onOrientationChange(){
     if(this.orientation.type === this.orientation.ORIENTATIONS.LANDSCAPE
       ||
@@ -51,11 +92,7 @@ this.is_landscape = false;
     })
   }
 
-  startTimer(){
-    // this.onTimeChange(null)
-
-    const limit=this.timer
-    this.stopwatchService.startTimer()
+  listenToTimer(limit:number){
     this.subscription=this.stopwatchService.timerListener.subscribe(timer=>{
       if(timer){
 
@@ -64,6 +101,8 @@ this.is_landscape = false;
 
           this.percentage= (this.timer/limit) * 100
           if(this.timer==limit){
+            this.percentage=0
+            this.playSound()
             this.stopwatchService.stopTimer();
             this.stopwatchService.resetTimer();
             this.subscription.unsubscribe()
@@ -73,6 +112,8 @@ this.is_landscape = false;
 
           this.percentage= 100 - ((this.timer/limit) * 100 )
           if(this.timer==0){
+            this.percentage=0
+            this.playSound()
             this.stopwatchService.stopTimer();
             this.stopwatchService.resetTimer();
             this.subscription.unsubscribe()
@@ -80,14 +121,24 @@ this.is_landscape = false;
         }
 
 
-
+        // this.saveState()
       }
     })
+  }
+  startTimer(){
+    // this.onTimeChange(null)
+
+
+    const limit=this.timer
+    this.stopwatchService.startTimer()
+
+    this.listenToTimer(limit)
 
   }
 
-  ngOnDestroy(){
-    this.subscription.unsubscribe()
+  ionViewDidLeave(){
+    this.saveState()
+    this.subscription?this.subscription.unsubscribe():null
     this.stopwatchService.stopTimer()
     this.stopwatchService.resetTimer()
   }
@@ -101,8 +152,12 @@ this.is_landscape = false;
     const timeInSeconds= (parseInt(this.minutes)*60) + parseInt(this.seconds)
     console.log(timeInSeconds)
 
- this.timer=timeInSeconds
+    this.timer=timeInSeconds
 
+  }
+
+  resetTimer(event){
+    event.el.value='00:00:00'
   }
 
   stopTimer(){
@@ -116,6 +171,8 @@ this.is_landscape = false;
   reset(){
     this.stopwatchService.resetTimer()
     this.timer=0
+    this.percentage=0
+    this.saveState()
   }
 
 
