@@ -21,6 +21,7 @@ export class CounterComponent implements OnInit {
   timer:number=0;
 
 
+
   type:CounterTypeEnum=CounterTypeEnum.countdown
   hour:string='00'
   minutes:string='00'
@@ -93,6 +94,7 @@ this.is_landscape = false;
   }
 
   listenToTimer(limit:number){
+    this.subscription? this.subscription.unsubscribe():null;
     this.subscription=this.stopwatchService.timerListener.subscribe(timer=>{
       if(timer){
 
@@ -105,7 +107,8 @@ this.is_landscape = false;
             this.playSound()
             this.stopwatchService.stopTimer();
             this.stopwatchService.resetTimer();
-            this.subscription.unsubscribe()
+            this.subscription.unsubscribe();
+            this.timer=this.convertToSeconds()
           }
         }else if(this.type===CounterTypeEnum.countdown){
           this.timer=limit-timer
@@ -116,7 +119,8 @@ this.is_landscape = false;
             this.playSound()
             this.stopwatchService.stopTimer();
             this.stopwatchService.resetTimer();
-            this.subscription.unsubscribe()
+            this.subscription.unsubscribe();
+            this.timer=this.convertToSeconds()
           }
         }
 
@@ -128,6 +132,8 @@ this.is_landscape = false;
   startTimer(){
     // this.onTimeChange(null)
 
+
+    !this.timer?this.timer=3540:null
 
     const limit=this.timer
     this.stopwatchService.startTimer()
@@ -156,9 +162,12 @@ this.is_landscape = false;
 
   }
 
-  resetTimer(event){
-    event.el.value='00:00:00'
+  convertToSeconds(){
+    return (parseInt(this.minutes)*60) + parseInt(this.seconds)
   }
+  // resetTimer(event){
+  //   event.el.value='00:00:00'
+  // }
 
   stopTimer(){
     this.stopwatchService.stopTimer()
@@ -170,7 +179,7 @@ this.is_landscape = false;
 
   reset(){
     this.stopwatchService.resetTimer()
-    this.timer=0
+    this.timer=this.convertToSeconds()
     this.percentage=0
     this.saveState()
   }

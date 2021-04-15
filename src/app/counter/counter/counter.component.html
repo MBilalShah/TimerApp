@@ -22,8 +22,17 @@
   ></circle-progress>
 
 
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button (click)='picker.open();resetTimer(picker)'>
+
+  <ion-fab  vertical="top" horizontal="start" slot="fixed">
+
+  <ion-fab-button (click)='reset();'>
+    <ion-icon name="refresh-outline"></ion-icon>
+  </ion-fab-button>
+
+  </ion-fab>
+  <ion-fab *ngIf='stopwatchService.isResetted' vertical="top" horizontal="end" slot="fixed">
+
+    <ion-fab-button (click)='picker.open();'>
       <ion-icon name="cog-outline" ></ion-icon>
     </ion-fab-button>
 
@@ -35,7 +44,7 @@
   </div>
 
 
-  <ion-button *ngIf='stopwatchService.isResetted' size='large' [disabled]='!timer' expand='block'(click)='startTimer()' >START
+  <ion-button *ngIf='stopwatchService.isResetted' size='large' expand='block'(click)='startTimer()' >START
     <ion-ripple-effect  type="bounded"></ion-ripple-effect>
   </ion-button>
 

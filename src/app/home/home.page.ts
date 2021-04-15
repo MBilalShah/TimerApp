@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Insomnia } from '@ionic-native/insomnia/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import {Storage} from '@ionic/storage'
 @Component({
@@ -12,7 +13,13 @@ export class HomePage {
 
 
   is_landscape:boolean=false
-  constructor(public router:Router,private orientation:ScreenOrientation,private storage:Storage) {
+  constructor(public router:Router,private orientation:ScreenOrientation,private storage:Storage,private insomnia:Insomnia) {
+    this.insomnia.keepAwake()
+  .then(
+    () => console.log('success'),
+    () => console.log('error')
+  );
+
     this.onOrientationChange()
     this.orientation.onChange().subscribe(data=>{
       console.log('orientation changed',data,this.orientation.type)
@@ -32,6 +39,7 @@ export class HomePage {
         {"title":"TABATA","workoutTime":"00:00:20","restTime":"00:00:10","rounds":8,"default":true,"id":"asd213c213123c12"}
         ,{"title":"FGB 1","workoutTime":"00:05:00","restTime":"00:01:00","rounds":5,"default":true,"id":"asd213c213123c13"}
         ,{"title":"FGB 2","workoutTime":"00:05:00","restTime":"00:01:00","rounds":3,"default":true,"id":"asd213c213123c14"}
+        ,{"title":"EMOM 20","workoutTime":"00:01:00","restTime":"00:00:00","rounds":20,"default":true,"id":"asd213c213123c15"}
       ])
     }
     // const storageName = 'myFields';
@@ -47,7 +55,6 @@ export class HomePage {
 }
 
   goTo(tabName:string){
-
     this.router.navigate([`/home/${tabName}`])
   }
 

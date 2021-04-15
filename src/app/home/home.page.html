@@ -25,6 +25,11 @@
       <ion-icon [color]="router.url.includes('interval')?'primary':'tertiary'" name="infinite-outline"></ion-icon>
       <ion-label [color]="router.url.includes('interval')?'primary':'tertiary'">Interval</ion-label>
     </ion-tab-button>
+
+    <ion-tab-button tab="settings" (click)='goTo("settings")'>
+      <ion-icon [color]="router.url.includes('settings')?'primary':'tertiary'" name="cog-outline"></ion-icon>
+      <ion-label [color]="router.url.includes('settings')?'primary':'tertiary'">Settings</ion-label>
+    </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
 </ion-content>

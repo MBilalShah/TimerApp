@@ -1,0 +1,22 @@
+<ion-list [formGroup]='form'>
+  <ion-list-header class="black">
+   Settings
+    <!-- <ion-icon  class='addicon' color="primary" name="add-outline" item-end ></ion-icon> -->
+  </ion-list-header>
+
+
+  <ion-item>
+    <ion-label> Countdown Time:</ion-label>
+    <!-- <ion-button (click)='showPicker()'>Open Picker</ion-button> -->
+    <ion-input type="tel" formControlName='countdown' (click)='showPicker()'  appNumbersOnly ></ion-input>
+    <!-- <ion-input formControlName='rounds' type="tel" pattern="[0-9]"></ion-input> -->
+
+  </ion-item>
+
+
+
+</ion-list>
+
+<ion-button  size='large' expand='block'(click)='save()' >SAVE
+  <ion-ripple-effect  type="bounded"></ion-ripple-effect>
+</ion-button>

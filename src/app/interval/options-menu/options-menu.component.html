@@ -1,0 +1,43 @@
+<ion-list>
+
+  <ion-item  (click)='edit()'>
+
+    <ion-label >
+    Edit
+    </ion-label>
+
+    <ion-icon  color='primary' class='actions'  name="pencil-outline"></ion-icon>
+
+    <!-- <ion-icon color='primary' (click)='openMenu($event)' class='actions' name="ellipsis-vertical-outline"></ion-icon> -->
+    <!-- <ion-icon color='primary' class='actions' name="sync-outline"></ion-icon> -->
+    <!-- <ion-icon *ngIf='!interval.default' color='primary' class='actions' (click)='deleteInterval(index)' name="trash-outline"></ion-icon> -->
+  </ion-item>
+
+  <ion-item  (click)='copy()'>
+
+    <ion-label >
+    Copy
+    </ion-label>
+
+    <ion-icon color='primary' class='actions' name="copy-outline"></ion-icon>
+
+    <!-- <ion-icon color='primary' (click)='openMenu($event)' class='actions' name="ellipsis-vertical-outline"></ion-icon> -->
+    <!-- <ion-icon color='primary' class='actions' name="sync-outline"></ion-icon> -->
+    <!-- <ion-icon *ngIf='!interval.default' color='primary' class='actions' (click)='deleteInterval(index)' name="trash-outline"></ion-icon> -->
+  </ion-item>
+
+
+  <ion-item (click)='$delete()'>
+
+    <ion-label >
+    Delete
+    </ion-label>
+
+    <!-- <ion-icon  color='primary' class='actions'  name="pencil-outline"></ion-icon> -->
+
+    <!-- <ion-icon color='primary' (click)='openMenu($event)' class='actions' name="ellipsis-vertical-outline"></ion-icon> -->
+    <!-- <ion-icon color='primary' class='actions' name="sync-outline"></ion-icon> -->
+    <ion-icon  color='primary' class='actions'  name="trash-outline"></ion-icon>
+  </ion-item>
+
+</ion-list>

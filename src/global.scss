@@ -35,13 +35,13 @@
   margin: auto;
   font-family: 'digital-7';
   font-size: 22vw;
-  color: #F71C00;
+  color: #FB331A;
 }
 
 .stop-watch-time{
   font-family: 'digital-7';
   font-size: 33vw;
-  color: #F71C00;
+  color: #FB331A;
   text-align: center;
   margin: 40px;
   margin-top: 55px;
@@ -49,19 +49,19 @@
 
 .countdown-text{
   font-family: 'digital-7';
-  color: #F71C00;
+  color: #FB331A;
 }
 
 ion-toggle {
   --background: gray;
-  --background-checked: #F71C00;
+  --background-checked: #FB331A;
 
-  --handle-background: #F71C00;
+  --handle-background: #FB331A;
   --handle-background-checked: gray;
 }
 
 ion-fab-button{
-  color:#F71C00
+  color:#FB331A
 }
 
 .landscape{
@@ -119,3 +119,6 @@ ion-fab{
 //   font-size: 20px;
 // }
 
+.picker-opt{
+  font-size: 27px;  //change size depend your Requirement
+}

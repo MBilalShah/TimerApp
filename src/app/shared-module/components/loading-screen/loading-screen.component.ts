@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 import { StopwatchServiceService } from '../../services/stopwatch-service.service';
 
 @Component({
@@ -9,18 +10,19 @@ import { StopwatchServiceService } from '../../services/stopwatch-service.servic
 })
 export class LoadingScreenComponent implements OnInit {
 
-  constructor(private stopwatchService:StopwatchServiceService,private modal:ModalController) { }
+  constructor(private stopwatchService:StopwatchServiceService,private modal:ModalController,private storage:Storage) { }
 
   // @Input() timer:number=0
+  interval
   ngOnInit() {}
 
   ionViewDidEnter(){
     this._timer()
   }
   buffer:number=0
-  _timer(){
-     this.buffer=100
-    const interval= setInterval(()=>{
+  async _timer(){
+     this.buffer= await this.storage.get('countdown') || 10
+    this.interval= setInterval(()=>{
       this.buffer=this.buffer-1
       if(this.buffer &&this.buffer<=3){
         this.stopwatchService.playSound('beep')
@@ -33,10 +35,15 @@ export class LoadingScreenComponent implements OnInit {
       if(this.buffer==0){
         this.modal.dismiss()
         // loading.dismiss()
-        clearInterval(interval)
+        clearInterval(this.interval)
 
       }
     },1000)
   }
 
+  skipLoading(){
+    this.modal.dismiss()
+    this.stopwatchService.playSound('bell')
+    clearInterval(this.interval)
+  }
 }

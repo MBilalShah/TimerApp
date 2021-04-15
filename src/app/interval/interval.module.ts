@@ -13,11 +13,13 @@ import { IntervalTimerComponent } from './interval-timer/interval-timer.componen
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 import { SharedModuleModule } from '../shared-module/shared-module.module';
+import { OptionsMenuComponent } from './options-menu/options-menu.component';
+import { LoopPopupComponent } from './loop-popup/loop-popup.component';
 
 @NgModule({
   declarations: [
     IntervalComponent,
-    IntervalFormComponent,IntervalTimerComponent
+    IntervalFormComponent,IntervalTimerComponent,OptionsMenuComponent,LoopPopupComponent
   ],
   imports: [
     CommonModule,

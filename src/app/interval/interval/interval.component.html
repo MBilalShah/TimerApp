@@ -20,8 +20,11 @@
         ({{interval.workoutTime | timeshow}}, {{interval.restTime |timeshow}}, {{interval.rounds}})
       </span>
     </ion-label>
-    <ion-icon *ngIf='!interval.default' color='primary' class='actions' (click)='editInterval(index)' name="pencil-outline"></ion-icon>
-    <ion-icon *ngIf='!interval.default' color='primary' class='actions' (click)='deleteInterval(index)' name="trash-outline"></ion-icon>
+    <!-- <ion-icon color='primary' (click)='loopWorkout(interval.id)' class='actions' name="sync-outline"></ion-icon> -->
+    <ion-icon color='primary' (click)='openMenu($event,index)' class='actions' name="ellipsis-vertical-outline"></ion-icon>
+    <!-- <ion-icon color='primary' class='actions' name="sync-outline"></ion-icon> -->
+    <!-- <ion-icon *ngIf='!interval.default' color='primary' class='actions' (click)='editInterval(index)' name="pencil-outline"></ion-icon> -->
+    <!-- <ion-icon *ngIf='!interval.default' color='primary' class='actions' (click)='deleteInterval(index)' name="trash-outline"></ion-icon> -->
   </ion-item>
 
 

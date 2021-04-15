@@ -28,6 +28,10 @@ const routes: Routes = [
       {
         path:'interval',
         loadChildren: () => import('./../interval/interval.module').then(m => m.IntervalModule),
+      },
+      {
+        path:'settings',
+        loadChildren: () => import('./../settings/settings.module').then(m => m.SettingsModule),
       }
     ]
   },

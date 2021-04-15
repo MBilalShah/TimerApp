@@ -17,7 +17,6 @@ export class StopwatchComponent implements OnInit {
       )
    }
    subscription:Subscription
-
   is_landscape:boolean=false;
   laps:any[]=[]
   @ViewChild('content') content:IonContent;

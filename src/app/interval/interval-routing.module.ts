@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path:'interval-timer/:index',
     component:IntervalTimerComponent
+  },
+  {
+    path:'loop-interval-timer/:index/:rounds/:rest',
+    component:IntervalTimerComponent
   }
 ];
 

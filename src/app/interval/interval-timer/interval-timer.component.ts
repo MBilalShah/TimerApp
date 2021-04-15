@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Interval, IntervalForm, IntervalType } from 'src/app/shared-module/Models/Interval.Model';
@@ -14,24 +14,32 @@ import { SaveStateService } from 'src/app/shared-module/services/save-state.serv
 })
 export class IntervalTimerComponent implements OnInit {
 
-  constructor(public stopwatchService:StopwatchServiceService,private acRoute:ActivatedRoute,private storage:Storage,private orientation:ScreenOrientation,private saveStateService:SaveStateService) {
+  constructor(public stopwatchService:StopwatchServiceService,private acRoute:ActivatedRoute,private storage:Storage,private orientation:ScreenOrientation,private saveStateService:SaveStateService,private ngZone:NgZone) {
 
   }
 
+  isCompleted:boolean=false
   subscription:Subscription
-  percentage:number = 100;
+  percentage:number = 0;
   timer:number=0
   intervals:Interval[]=[]
   activeIndex:number=0
   is_landscape:boolean=false;
   int:IntervalForm;
   color:string='#FB331A'
+  noOfLoops:number=1
+  restTime:number=0
   // saveState(){
   //   this.saveState
   // }
 
   ionViewDidEnter(){
-    this.getState()
+
+
+
+    if(!this.restTime){
+    this.getState()}
+
   }
 
   saveState(){
@@ -39,7 +47,9 @@ export class IntervalTimerComponent implements OnInit {
       percentage:this.percentage,
       timer:this.timer,
       activeIndex:this.activeIndex,
-      color:this.color
+      color:this.color,
+      noOfLoops:this.noOfLoops,
+      restTime:this.restTime
     })
   }
 
@@ -73,7 +83,7 @@ export class IntervalTimerComponent implements OnInit {
         ||
         this.orientation.type === this.orientation.ORIENTATIONS.PORTRAIT_SECONDARY
       ){
-this.is_landscape = false;
+        this.is_landscape = false;
       }
   }
   async ngOnInit() {
@@ -81,7 +91,7 @@ this.is_landscape = false;
     this.onOrientationChange()
     this.orientation.onChange().subscribe(data=>{
       console.log('orientation changed',data,this.orientation.type)
-  this.onOrientationChange()
+      this.onOrientationChange()
     })
     const ints= await this.storage.get('intervals') as IntervalForm[]
 
@@ -90,18 +100,30 @@ this.is_landscape = false;
     this.int= ints.find(int=>int.id===index)
 
     console.log(this.int)
+    this.noOfLoops=this.int.noOfLoops;
+    this.restTime=this.int.timeBetweenLoops
 
-    for(let i= 0;i<this.int.rounds;i++){
-      this.intervals.push({
-        time: this.convertToSeconds(this.int.workoutTime),
-        type: IntervalType.workout,
-      });
+    for(let i= 0;i<this.noOfLoops;i++){
+      for(let i= 0;i<this.int.rounds;i++){
+        this.intervals.push({
+          time: this.convertToSeconds(this.int.workoutTime),
+          type: IntervalType.workout,
+        });
 
-      this.intervals.push({
-        time: this.convertToSeconds(this.int.restTime),
-        type: IntervalType.rest,
-      });
+        this.intervals.push({
+          time: this.convertToSeconds(this.int.restTime),
+          type: IntervalType.rest,
+        });
+      }
+      if(this.restTime && i<this.noOfLoops-1){
+        this.intervals.push({
+          time:this.restTime,
+          type:IntervalType.rest
+        })
+      }
     }
+
+
 
     console.log(this.intervals)
 
@@ -119,24 +141,50 @@ this.is_landscape = false;
 
   timerListener(timer){
     const activeInterval:Interval=this.intervals[this.activeIndex]
-    this.timer=timer - 1
+    // activeInterval.time==0? this.activeIndex=this.activeIndex+1:null;
+    // if(activeInterval.time==0){
 
+    //   this.stopwatchService.timerVal=this.stopwatchService.timerVal+1
+    //   // this.stopwatchService.resetTimer()
+    //   // this.activeIndex=this.activeIndex+1
+    //   // return;
+    // }
+    this.timer = timer;
+
+    this.percentage=(this.timer/ activeInterval.time )* 100
     if(this.timer>=activeInterval.time){
-      this.delayOneSecond(()=>{
+      if(this.intervals[this.activeIndex+1]?.time==0){
+        this.activeIndex=this.activeIndex+2
+      }else{
         this.activeIndex=this.activeIndex+1
-        if(this.activeIndex>this.intervals.length -1){
-          this.stopTimer()
-          this.reset()
-          this.subscription.unsubscribe()
-          return;
-        }
+      }
 
-        this.intervals[this.activeIndex].type==0? this.color= '#FB331A': this.color='#2D92F8'
+      if(this.activeIndex>this.intervals.length -1){
+        this.stopTimer()
+        this.reset()
+        this.subscription.unsubscribe()
+        this.stopwatchService.playSound('bell')
+        this.isCompleted=true;
+        return;
+      }
 
-      })
       this.playSound()
       this.stopwatchService.resetTimer()
 
+    }else if( activeInterval.time-this.timer<=3){
+      this.stopwatchService.playSound('beep')
+    }
+    if(this.intervals[this.activeIndex].time){
+      this.intervals[this.activeIndex].type==0? (this.delayOneSecond(()=>{
+
+
+        this.color= '#FB331A'
+
+       })): (this.delayOneSecond(()=>{
+
+         this.color='#2D92F8'
+
+        }))
     }
 
     // if(this.activeIndex>this.intervals.length -1){
@@ -149,7 +197,8 @@ this.is_landscape = false;
 
   startTimer(){
 
-
+    this.isCompleted=false
+    this.intervals[this.activeIndex].type==0?  this.color= '#FB331A':    this.color='#2D92F8'
     this.stopwatchService.startTimer()
 
     this.subscription? this.subscription.unsubscribe():null;
@@ -179,6 +228,8 @@ this.is_landscape = false;
     this.stopwatchService.resetTimer()
     this.timer=0
     this.activeIndex=0
+    this.percentage=0
+    this.subscription.unsubscribe()
   }
 
   ceiling(val){return Math.ceil(val)}
