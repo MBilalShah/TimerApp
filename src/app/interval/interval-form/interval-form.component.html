@@ -51,7 +51,9 @@
       <ion-item>
         <ion-label> Rest Time:</ion-label>
         <!-- <ion-button (click)='showPicker()'>Open Picker</ion-button> -->
-        <ion-input type="tel" formControlName='timeBetweenLoops' (click)='showPicker("timeBetweenLoops")'  appNumbersOnly ></ion-input>
+        <ion-datetime (ionChange)='onDateChange($event)' formControlName='timeBetweenLoops' value='00:00:00' #picker display-format="mm:ss" picker-format="mm:ss"></ion-datetime>
+
+        <!-- <ion-input type="tel" formControlName='timeBetweenLoops' (click)='showPicker("timeBetweenLoops")'  appNumbersOnly ></ion-input> -->
         <!-- <ion-input formControlName='rounds' type="tel" pattern="[0-9]"></ion-input> -->
       </ion-item>
 

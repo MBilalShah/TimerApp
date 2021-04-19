@@ -67,8 +67,8 @@ export class StopwatchServiceService {
 file.onSuccess.subscribe(() => {console.log('Action is successful')
 this.beep.setVolume(1)
 this.bell.setVolume(1)});
-this.nativeAudio.setVolumeForComplexAsset('beep',1)
-this.nativeAudio.setVolumeForComplexAsset('bell',1)
+this.nativeAudio.setVolumeForComplexAsset('beep',1.0)
+this.nativeAudio.setVolumeForComplexAsset('bell',1.0)
 file.onError.subscribe((error) => console.log('Error!', error));
 
 

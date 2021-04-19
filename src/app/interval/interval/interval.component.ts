@@ -23,7 +23,7 @@ export class IntervalComponent implements OnInit {
 
     this.intervals = await this.storage.get('intervals') || []
 
-    console.log(JSON.stringify(this.intervals))
+    console.log((this.intervals))
   }
 
 

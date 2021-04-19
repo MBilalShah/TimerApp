@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Insomnia } from '@ionic-native/insomnia/ngx';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import {Storage} from '@ionic/storage'
+import { IntervalForm } from '../shared-module/Models/Interval.Model';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -36,11 +37,11 @@ export class HomePage {
 
     if(!exists){
       this.storage.set('intervals',[
-        {"title":"TABATA","workoutTime":"00:00:20","restTime":"00:00:10","rounds":8,"default":true,"id":"asd213c213123c12"}
-        ,{"title":"FGB 1","workoutTime":"00:05:00","restTime":"00:01:00","rounds":5,"default":true,"id":"asd213c213123c13"}
-        ,{"title":"FGB 2","workoutTime":"00:05:00","restTime":"00:01:00","rounds":3,"default":true,"id":"asd213c213123c14"}
-        ,{"title":"EMOM 20","workoutTime":"00:01:00","restTime":"00:00:00","rounds":20,"default":true,"id":"asd213c213123c15"}
-      ])
+        {"title":"TABATA","workoutTime":"00:00:20","restTime":"00:00:10","rounds":8,"default":true,"id":"asd213c213123c12",noOfLoops:1,timeBetweenLoops:'00:00:00'}
+        ,{"title":"FGB 1","workoutTime":"00:05:00","restTime":"00:01:00","rounds":5,"default":true,"id":"asd213c213123c13",noOfLoops:1,timeBetweenLoops:'00:00:00'}
+        ,{"title":"FGB 2","workoutTime":"00:05:00","restTime":"00:01:00","rounds":3,"default":true,"id":"asd213c213123c14",noOfLoops:1,timeBetweenLoops:'00:00:00'}
+        ,{"title":"EMOM 20","workoutTime":"00:01:00","restTime":"00:00:00","rounds":20,"default":true,"id":"asd213c213123c15",noOfLoops:1,timeBetweenLoops:'00:00:00'}
+      ] as IntervalForm[])
     }
     // const storageName = 'myFields';
 

@@ -28,7 +28,8 @@ export class IntervalTimerComponent implements OnInit {
   int:IntervalForm;
   color:string='#FB331A'
   noOfLoops:number=1
-  restTime:number=0
+  restTime:string="00:00:00"
+  roundNo:number=0
   // saveState(){
   //   this.saveState
   // }
@@ -109,16 +110,18 @@ export class IntervalTimerComponent implements OnInit {
           time: this.convertToSeconds(this.int.workoutTime),
           type: IntervalType.workout,
         });
-
-        this.intervals.push({
-          time: this.convertToSeconds(this.int.restTime),
-          type: IntervalType.rest,
-        });
+    if (i < this.int.rounds - 1){
+      this.intervals.push({
+        time: this.convertToSeconds(this.int.restTime),
+        type: IntervalType.rest,
+      });
+    }
       }
       if(this.restTime && i<this.noOfLoops-1){
         this.intervals.push({
-          time:this.restTime,
-          type:IntervalType.rest
+          time:this.convertToSeconds(this.restTime),
+          type:IntervalType.rest,
+
         })
       }
     }
@@ -138,6 +141,7 @@ export class IntervalTimerComponent implements OnInit {
     return (parseInt( minutes) * 60) + parseInt( seconds)
   }
   // isRest:boolean=false;
+
 
   timerListener(timer){
     const activeInterval:Interval=this.intervals[this.activeIndex]
@@ -170,6 +174,7 @@ export class IntervalTimerComponent implements OnInit {
 
       this.playSound()
       this.stopwatchService.resetTimer()
+      this.timer=0
 
     }else if( activeInterval.time-this.timer<=3){
       this.stopwatchService.playSound('beep')
@@ -209,6 +214,7 @@ export class IntervalTimerComponent implements OnInit {
   }
 
   delayOneSecond(callback){
+    // callback()
     setTimeout(() => {
       callback()
     }, 1000);
@@ -232,8 +238,15 @@ export class IntervalTimerComponent implements OnInit {
     this.subscription.unsubscribe()
   }
 
-  ceiling(val){return Math.ceil(val)}
+  ceiling(val){
+    // return val;
+    return Math.ceil(val)
+    }
 
+  floor(val){
+    // return val;
+    return Math.floor(val)
+  }
   ionViewDidLeave(){
     this.subscription?this.subscription.unsubscribe():null
     this.stopwatchService.stopTimer()

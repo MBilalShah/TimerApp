@@ -16,5 +16,6 @@ export interface IntervalForm{
   rounds:number;
   id:string;
   noOfLoops:number;
-  timeBetweenLoops:number;
+  timeBetweenLoops:string;
+  default?:boolean
 }

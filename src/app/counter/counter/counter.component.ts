@@ -180,8 +180,16 @@ this.is_landscape = false;
   reset(){
     this.stopwatchService.resetTimer()
     this.timer=this.convertToSeconds()
-    this.percentage=0
+    this.percentage=0;
     this.saveState()
+  }
+
+  hardReset(){
+    this.reset()
+    this.timer=0;
+    this.saveState()
+    this.minutes='00'
+    this.seconds='00'
   }
 
 

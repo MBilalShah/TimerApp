@@ -33,7 +33,7 @@ export class IntervalFormComponent implements OnInit {
       ]],
       rounds:['1',[Validators.required]],
       noOfLoops:['1',[Validators.required]],
-      timeBetweenLoops:['1',[Validators.required]]
+      timeBetweenLoops:['00:00:00',[Validators.required]]
     })
 
     this.editMode? this.form.patchValue(this.interval):null
@@ -111,10 +111,14 @@ export class IntervalFormComponent implements OnInit {
         {
           name: 'Numbers',
           options: this.getColumnOptions(),
-          selectedIndex: this.form.value[columnName],
+          selectedIndex: this.form.value[columnName ] - 1,
         },
       ],
     };
+
+        let picker = await this.pickerController.create(options);
+    picker.present()
+    // picker.onDidDismiss().then(value=>console.log(value))
   }
 
   // async showPicker() {
@@ -145,7 +149,7 @@ export class IntervalFormComponent implements OnInit {
 
   getColumnOptions(){
     let options = [];
-    for(let i = 0 ; i<99;i++){
+    for(let i = 1 ; i<99;i++){
       options.push({text:i as any,value:i})
     }
     // this.animals.forEach(x => {
