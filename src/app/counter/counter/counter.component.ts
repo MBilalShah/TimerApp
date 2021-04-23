@@ -35,6 +35,7 @@ export class CounterComponent implements OnInit {
 
   ionViewDidEnter(){
     this.getState()
+    this.stopwatchService.initializeFiles()
   }
 
 
@@ -147,6 +148,7 @@ this.is_landscape = false;
     this.subscription?this.subscription.unsubscribe():null
     this.stopwatchService.stopTimer()
     this.stopwatchService.resetTimer()
+    this.stopwatchService.unloadFiles()
   }
 
   onTimeChange(event){

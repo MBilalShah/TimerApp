@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { LoadingScreenComponent } from './shared-module/components/loading-screen/loading-screen.component';
 import { Insomnia } from '@ionic-native/insomnia/ngx';
 import { NgxHowlerService } from 'ngx-howler';
+import { AudioManagement } from '@ionic-native/audio-management/ngx';
 @NgModule({
   declarations: [AppComponent,LoadingScreenComponent],
   entryComponents: [],
@@ -19,7 +20,7 @@ import { NgxHowlerService } from 'ngx-howler';
     name: '__mydb',
 driverOrder: ['indexeddb', 'sqlite', 'websql']
   }),CommonModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },NativeAudio,Media,Insomnia,NgxHowlerService],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },NativeAudio,Media,Insomnia,NgxHowlerService,AudioManagement],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

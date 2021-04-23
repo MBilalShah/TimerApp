@@ -17,6 +17,7 @@ export class StopwatchServiceService {
   constructor(private loadingContoller:LoadingController,private nativeAudio:NativeAudio,private media:Media,private modalController:ModalController,
     private platform:Platform,private howler:NgxHowlerService) {
 
+
       this.howler.loadScript('https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js');
 
       this.platform.pause.subscribe(()=>{
@@ -32,11 +33,12 @@ export class StopwatchServiceService {
 
   }
 
+
   initializeFiles(){
-    this.beep= this.media.create('assets/sounds/beep.mp3')
-    this.bell=this.media.create('assets/sounds/bell-sound.mp3')
-    this.setFile(this.beep)
-    this.setFile(this.bell)
+    // this.beep= this.media.create('assets/sounds/beep.mp3')
+    // this.bell=this.media.create('assets/sounds/bell-sound.mp3')
+    // this.setFile(this.beep)
+    // this.setFile(this.bell)
     this.nativeAudio.preloadSimple('beep', 'assets/sounds/beep.mp3').then((success)=>{
       console.log("success");
     },(error)=>{
@@ -49,14 +51,19 @@ export class StopwatchServiceService {
       console.log(error);
     });
 
-    this.howler.register('bell',{
-      src:'assets/sounds/bell-sound.mp3',
-      html5:true,
+    // this.howler.register('bell',{
+    //   src:'assets/sounds/bell-sound.mp3',
+    //   html5:true,
 
-    }).subscribe(status=>console.log('bell status',status))
-    this.howler.register('beep',{
-      src:'assets/sounds/beep.mp3'
-    }).subscribe(status=>console.log('bell status',status))
+    // }).subscribe(status=>console.log('bell status',status))
+    // this.howler.register('beep',{
+    //   src:'assets/sounds/beep.mp3'
+    // }).subscribe(status=>console.log('bell status',status))
+  }
+
+  unloadFiles(){
+    this.nativeAudio.unload('bell')
+    this.nativeAudio.unload('beep')
   }
   setFile(file:MediaObject){
 
@@ -67,8 +74,7 @@ export class StopwatchServiceService {
 file.onSuccess.subscribe(() => {console.log('Action is successful')
 this.beep.setVolume(1)
 this.bell.setVolume(1)});
-this.nativeAudio.setVolumeForComplexAsset('beep',1.0)
-this.nativeAudio.setVolumeForComplexAsset('bell',1.0)
+
 file.onError.subscribe((error) => console.log('Error!', error));
 
 
@@ -76,10 +82,22 @@ file.onError.subscribe((error) => console.log('Error!', error));
   playSound(sound:'beep'|'bell'){
     // this[sound].play()
 
+
+
     this.nativeAudio.play(sound, () => console.log('uniqueId1 is done playing'));
 
     // const player=this.howler.get(sound)
     // player.play()
+
+
+//     if(sound==='beep'){
+//       var mySound = new Audio();
+// var mySound = new Audio('assets/sounds/beep.mp3'); mySound.play();
+//     }else{
+//       var mySound = new Audio();
+// var mySound = new Audio('assets/sounds/bell-sound.mp3'); mySound.play();
+//     }
+
    }
 
   timerVal:number=0;

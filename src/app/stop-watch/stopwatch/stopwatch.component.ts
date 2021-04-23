@@ -53,6 +53,7 @@ this.is_landscape = false;
   }
   ionViewDidEnter(){
     this.getState()
+    this.stopWatchService.initializeFiles()
   }
   saveState(){
     this.saveStateService.saveState(ScreenEnum.stopwatch,{
@@ -101,6 +102,7 @@ if(data){
     this.stopWatchService.stopTimer()
     this.stopWatchService.resetTimer()
     this.laps=[]
+    this.stopWatchService.unloadFiles()
 
   }
 }

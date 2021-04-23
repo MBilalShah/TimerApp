@@ -29,7 +29,8 @@ export class IntervalTimerComponent implements OnInit {
   color:string='#FB331A'
   noOfLoops:number=1
   restTime:string="00:00:00"
-  roundNo:number=0
+  roundNo:number=1;
+  intervalType:IntervalType=IntervalType.workout;
   // saveState(){
   //   this.saveState
   // }
@@ -38,6 +39,7 @@ export class IntervalTimerComponent implements OnInit {
 
 
 
+    this.stopwatchService.initializeFiles()
     if(!this.restTime){
     this.getState()}
 
@@ -158,9 +160,22 @@ export class IntervalTimerComponent implements OnInit {
     this.percentage=(this.timer/ activeInterval.time )* 100
     if(this.timer>=activeInterval.time){
       if(this.intervals[this.activeIndex+1]?.time==0){
-        this.activeIndex=this.activeIndex+2
+        this.activeIndex=this.activeIndex+2;
+        this.delayOneSecond(()=>{this.intervalType=this.intervals[this.activeIndex].type
+          this.roundNo= (this.floor((this.activeIndex/2))%(this.floor( this.ceiling(this.intervals.length / 2)/this.noOfLoops)))+1
+        })
       }else{
-        this.activeIndex=this.activeIndex+1
+        this.activeIndex=this.activeIndex+1;
+        this.delayOneSecond(() => {
+          this.intervalType = this.intervals[this.activeIndex].type;
+          this.roundNo =
+            (this.floor(this.activeIndex / 2) %
+              this.floor(
+                this.ceiling(this.intervals.length / 2) / this.noOfLoops
+              )) +
+            1;
+        });
+
       }
 
       if(this.activeIndex>this.intervals.length -1){
@@ -174,7 +189,6 @@ export class IntervalTimerComponent implements OnInit {
 
       this.playSound()
       this.stopwatchService.resetTimer()
-      this.timer=0
 
     }else if( activeInterval.time-this.timer<=3){
       this.stopwatchService.playSound('beep')
@@ -183,9 +197,11 @@ export class IntervalTimerComponent implements OnInit {
       this.intervals[this.activeIndex].type==0? (this.delayOneSecond(()=>{
 
 
+
         this.color= '#FB331A'
 
        })): (this.delayOneSecond(()=>{
+
 
          this.color='#2D92F8'
 
@@ -236,6 +252,7 @@ export class IntervalTimerComponent implements OnInit {
     this.activeIndex=0
     this.percentage=0
     this.subscription.unsubscribe()
+    this.roundNo=1
   }
 
   ceiling(val){
@@ -252,6 +269,16 @@ export class IntervalTimerComponent implements OnInit {
     this.stopwatchService.stopTimer()
     this.stopwatchService.resetTimer()
     this.saveState()
+    this.stopwatchService.unloadFiles()
   }
+  // getRoundNumber(){
+
+  //   this.delayOneSecond(()=>{
+  //     this.roundNo= (this.floor((this.activeIndex/2))%(this.floor( this.ceiling(this.intervals.length / 2)/this.noOfLoops)))+1
+
+  //   })
+
+
+
 
 }

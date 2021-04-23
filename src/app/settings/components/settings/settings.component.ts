@@ -41,7 +41,7 @@ export class SettingsComponent implements OnInit {
       ],
       columns:[{
         name:'Numbers',
-        options:this.getColumnOptions(),selectedIndex:this.form.value.countdown
+        options:this.getColumnOptions(),selectedIndex:this.form.value.countdown - 1
       }]
     };
 
@@ -52,7 +52,7 @@ export class SettingsComponent implements OnInit {
 
   getColumnOptions(){
     let options = [];
-    for(let i = 0 ; i<99;i++){
+    for(let i = 1 ; i<99;i++){
       options.push({text:i as any,value:i})
     }
     // this.animals.forEach(x => {
