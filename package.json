@@ -30,7 +30,6 @@
     "@ionic/storage": "^2.3.1",
     "ion-sound": "^3.0.7",
     "ionic-angular": "^3.9.10",
-    "ios-deploy": "^1.11.4",
     "ng-circle-progress": "^1.6.0",
     "ngx-howler": "^11.0.0",
     "rxjs": "~6.6.0",
