@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { PickerController, ToastController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core/dist/types/components/picker/picker-interface';
 import {Storage} from '@ionic/storage'
@@ -11,9 +11,9 @@ import {Storage} from '@ionic/storage'
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private pickerController:PickerController,private fb:FormBuilder,private storage:Storage,private toastController:ToastController) { }
+  constructor(private pickerController:PickerController,private fb:UntypedFormBuilder,private storage:Storage,private toastController:ToastController) { }
 
-  form:FormGroup
+  form:UntypedFormGroup
   ngOnInit() {
     this.form=this.fb.group({
       countdown:[]
