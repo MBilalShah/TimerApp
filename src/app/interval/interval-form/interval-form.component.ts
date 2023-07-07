@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { AlertController, ModalController, PickerController } from '@ionic/angular';
 import { PickerOptions } from '@ionic/core/dist/types/components/picker/picker-interface';
 // import { PickerColumnOption } from 'ionic-angular';
@@ -13,9 +13,9 @@ import { generateId } from 'src/app/shared-module/helper';
 })
 export class IntervalFormComponent implements OnInit {
 
-  constructor(private modalController:ModalController,private fb:FormBuilder,private alertController:AlertController,private pickerController:PickerController) { }
+  constructor(private modalController:ModalController,private fb:UntypedFormBuilder,private alertController:AlertController,private pickerController:PickerController) { }
 
-  form:FormGroup
+  form:UntypedFormGroup
   @Input() editMode:boolean=false;
   @Input() interval;
   animals: string[] = ["Tiger", "Lion", "Elephant", "Fox", "Wolf"];
@@ -48,7 +48,7 @@ export class IntervalFormComponent implements OnInit {
   }
 
   validator(){
-    return (formControl:FormControl)=>{
+    return (formControl:UntypedFormControl)=>{
       const value=formControl.value
       const time= this.convertToSeconds(value)
       return time<5?( {'min_error':true}):null

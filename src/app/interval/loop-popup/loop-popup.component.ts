@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, ModalController, PickerController } from '@ionic/angular';
 // import { PickerOptions } from 'ionic-angular';
@@ -13,9 +13,9 @@ import { generateId } from 'src/app/shared-module/helper';
 export class LoopPopupComponent implements OnInit {
 
 
-  constructor(private modalController:ModalController,private fb:FormBuilder,private alertController:AlertController,private pickerController:PickerController,private router:Router) { }
+  constructor(private modalController:ModalController,private fb:UntypedFormBuilder,private alertController:AlertController,private pickerController:PickerController,private router:Router) { }
 
-  form:FormGroup
+  form:UntypedFormGroup
   @Input() editMode:boolean=false;
   @Input() interval_id:string;
 
