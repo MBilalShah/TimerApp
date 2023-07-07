@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { IonicModule } from '@ionic/angular';
 import { SettingsComponent } from './components/settings/settings.component';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,6 +14,6 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
     SettingsRoutingModule,
     IonicModule,
     ReactiveFormsModule
-  ],providers:[FormBuilder]
+  ],providers:[UntypedFormBuilder]
 })
 export class SettingsModule { }

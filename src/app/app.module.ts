@@ -14,13 +14,12 @@ import { Insomnia } from '@ionic-native/insomnia/ngx';
 import { NgxHowlerService } from 'ngx-howler';
 import { AudioManagement } from '@ionic-native/audio-management/ngx';
 @NgModule({
-  declarations: [AppComponent,LoadingScreenComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,    IonicStorageModule.forRoot({
-    name: '__mydb',
-driverOrder: ['indexeddb', 'sqlite', 'websql']
-  }),CommonModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },NativeAudio,Media,Insomnia,NgxHowlerService,AudioManagement],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, LoadingScreenComponent],
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot({
+            name: '__mydb',
+            driverOrder: ['indexeddb', 'sqlite', 'websql']
+        }), CommonModule],
+    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, NativeAudio, Media, Insomnia, NgxHowlerService, AudioManagement],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
