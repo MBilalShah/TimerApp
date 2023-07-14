@@ -1,0 +1,48 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/"></ion-back-button>
+  </ion-buttons>
+  <ion-title>SmartWood</ion-title>
+  <ion-buttons slot="primary">
+    <ion-button>
+      <ion-icon slot="start" name="download"></ion-icon>
+      <ion-icon slot="end" name="copy"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-item class="workout-items" lines="full">
+    <b slot="start">Date</b>
+    <p fill="outline" slot="end">7/13/23</p>
+  </ion-item>
+  <ion-item class="workout-items" lines="full">
+    <b slot="start">Total time</b>
+    <p fill="outline" slot="end">14:09</p>
+  </ion-item>
+  <ion-item class="workout-items" lines="full">
+    <div>
+      <div class="round-list">
+        <b>round 1</b>
+        <p>00:13</p>
+      </div>
+      <div class="round-list">
+        <b>round 2</b>
+        <p>00:05</p>
+      </div>
+      <div class="round-list">
+        <b>round 3</b>
+        <p>00:23</p>
+      </div>
+      <p slot="bottom">Time left over 00:20 / aditional reps:200</p>
+    </div>
+  </ion-item>
+  <ion-item lines="none" class="workout-inputs">
+    <ion-input placeholder="Additional reps"></ion-input>
+  </ion-item>
+  <ion-item lines="none" class="workout-inputs">
+    <ion-input placeholder="Name your workout"></ion-input>
+  </ion-item>
+  <ion-item lines="none" class="workout-inputs">
+    <ion-textarea [autoGrow]="true" placeholder="workout notes"></ion-textarea>
+  </ion-item>
+</ion-content>

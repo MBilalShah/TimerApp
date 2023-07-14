@@ -1,0 +1,22 @@
+.workout-items::part(native) {
+  background-color: #fff !important;
+  color: black !important;
+  border-left: 15px solid #FB331A;
+  margin-top: 10px;
+}
+
+.workout-inputs::part(native) {
+  background-color: #fff !important;
+  color: black !important;
+  margin-top: 20px;
+}
+
+ion-content::part(background) {
+  background-color: #ebebeb !important;
+}
+
+.round-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -7,13 +7,12 @@
   </ion-fab-button>
 
 </ion-fab> -->
-
-<ion-list>
-  <ion-list-header class="black">
-    Interval Modes
-    <ion-icon (click)='addInterval()' class='addicon' color="primary" name="add-outline" item-end ></ion-icon>
-  </ion-list-header>
-
+<ion-list-header class="black">
+  <ion-back-button defaultHref="/"></ion-back-button>
+  Interval Modes
+  <ion-icon (click)='addInterval()' class='addicon' color="primary" name="add-outline" item-end></ion-icon>
+</ion-list-header>
+<ion-content>
   <ion-item *ngFor='let interval of intervals;let index=index'>
     <ion-label (click)='openTimer(interval)'>{{interval.title}}
       <span>
@@ -21,15 +20,10 @@
       </span>
     </ion-label>
     <!-- <ion-icon color='primary' (click)='loopWorkout(interval.id)' class='actions' name="sync-outline"></ion-icon> -->
-    <ion-icon color='primary' (click)='openMenu($event,index)' class='actions' name="ellipsis-vertical-outline"></ion-icon>
+    <ion-icon color='primary' (click)='openMenu($event,index)' class='actions'
+      name="ellipsis-vertical-outline"></ion-icon>
     <!-- <ion-icon color='primary' class='actions' name="sync-outline"></ion-icon> -->
     <!-- <ion-icon *ngIf='!interval.default' color='primary' class='actions' (click)='editInterval(index)' name="pencil-outline"></ion-icon> -->
     <!-- <ion-icon *ngIf='!interval.default' color='primary' class='actions' (click)='deleteInterval(index)' name="trash-outline"></ion-icon> -->
   </ion-item>
-
-
-
-
-
-
-</ion-list>
+</ion-content>

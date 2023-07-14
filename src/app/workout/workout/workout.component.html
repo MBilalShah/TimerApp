@@ -1,0 +1,36 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/"></ion-back-button>
+  </ion-buttons>
+  <ion-title>SmartWood</ion-title>
+  <ion-buttons slot="primary">
+    <ion-button fill="outline">
+      <ion-icon slot="end" name="create"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <ion-item>
+    <ion-searchbar slot="start" class="custom-searchbar"></ion-searchbar>
+  </ion-item>
+  <ion-item class="workout-items" lines="none" button detail="false" (click)='goTo("workout-detail")'>
+    <ion-label>AMRAP</ion-label>
+    <p slot="end">7/13/23</p>
+    <p slot="end">14:29</p>
+  </ion-item>
+  <ion-item class="workout-items" lines="none" button detail="false" (click)='goTo("workout-detail")'>
+    <ion-label>FOR TIME</ion-label>
+    <p slot="end">7/13/22</p>
+    <p slot="end">12:29</p>
+  </ion-item>
+  <ion-item class="workout-items" lines="none" button detail="false" (click)='goTo("workout-detail")'>
+    <ion-label>ENOM</ion-label>
+    <p slot="end">7/13/23</p>
+    <p slot="end">11:29</p>
+  </ion-item>
+  <ion-item class="workout-items" lines="none" button detail="false" (click)='goTo("workout-detail")'>
+    <ion-label>TABATA</ion-label>
+    <p slot="end">7/13/23</p>
+    <p slot="end">14:29</p>
+  </ion-item>
+</ion-content>

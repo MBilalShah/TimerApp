@@ -25,6 +25,49 @@
 #container a {
   text-decoration: none;
 }
-.tabs-item-hide{
+
+.tabs-item-hide {
   display: none;
+}
+
+.home-list {
+  padding: 40% 5% 0% 5%;
+  position: relative;
+  background: none !important;
+  text-align: center;
+}
+
+ion-button {
+  margin: 0px 20px 30px 20px;
+  width: 75%;
+}
+
+ion-button::part(native) {
+  height: 50px !important;
+}
+
+.counter::part(native) {
+  background-color: #1a7dfb;
+}
+
+.for-time::part(native) {
+  background-color: #fbc21a;
+}
+
+.amrap::part(native) {
+  background-color: #fb1a6b;
+}
+
+.emom::part(native) {
+  background-color: #b11afb;
+}
+
+.tabata::part(native) {
+  background-color: blue;
+}
+
+.worklog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,0 +1,36 @@
+ion-item::part(native) {
+  background-color: #fff !important;
+  color: black !important;
+  margin-top: 2px;
+}
+
+ion-content::part(background) {
+  background-color: #ebebeb !important;
+}
+
+.workout-items::part(native) {
+  border-left: 15px solid #FB331A;
+}
+
+// .custom-searchbar {
+//   .searchbar-input {
+//     background: #fff !important;
+//     box-shadow: 1px 1px 1px 1px #f2f2f2, 0 0px 5px 0px #f2f2f2, 0 0px 5px 0px #e6e6e6 !important;
+//     color: black !important;
+//     width: 100%;
+//   }
+// }
+
+::ng-deep .searchbar-input.sc-ion-searchbar-md::-webkit-input-placeholder {
+  background: #fff !important;
+  box-shadow: 1px 1px 1px 1px #f2f2f2, 0 0px 5px 0px #f2f2f2, 0 0px 5px 0px #e6e6e6 !important;
+  color: black !important;
+  width: 100%;
+}
+
+.searchbar-input.sc-ion-searchbar-md {
+  background: #fff !important;
+  box-shadow: 1px 1px 1px 1px #f2f2f2, 0 0px 5px 0px #f2f2f2, 0 0px 5px 0px #e6e6e6 !important;
+  color: black !important;
+  width: 100%;
+}

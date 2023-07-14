@@ -1,54 +1,44 @@
 <ng-container *ngIf='!is_landscape'>
 
-  <ion-datetime style='display: none;' value='00:00:00' (ionChange)='onTimeChange($event)' #picker display-format="mm:ss" picker-format="mm:ss"
-
-  ></ion-datetime>
-
-
-  <circle-progress class="countdown-text" style="margin-top:20px"
-  [percent]="percentage"
-  [maxPercent]="100"
-  [radius]="100"
-  [showTitle]="false"
-  [showSubtitle]="true"
-  [subtitle]="timer * 1000 | date:'mm:ss':'UTC'"
-  [subtitleFontSize]="'85px'"
-  [showUnits]="false"
-  [outerStrokeWidth]="8"
-  [outerStrokeColor]="'#FB331A'"
-  [showZeroOuterStroke]="false"
-  [innerStrokeWidth]="0"
-  [subtitleColor]='"#FB331A"'
-  ></circle-progress>
+  <ion-datetime style='display: none;' value='00:00:00' (ionChange)='onTimeChange($event)' #picker
+    display-format="mm:ss" picker-format="mm:ss"></ion-datetime>
 
 
+  <circle-progress class="countdown-text" style="margin-top:20px" [percent]="percentage" [maxPercent]="100"
+    [radius]="100" [showTitle]="false" [showSubtitle]="true" [subtitle]="timer * 1000 | date:'mm:ss':'UTC'"
+    [subtitleFontSize]="'85px'" [showUnits]="false" [outerStrokeWidth]="8" [outerStrokeColor]="'#FB331A'"
+    [showZeroOuterStroke]="false" [innerStrokeWidth]="0" [subtitleColor]='"#FB331A"'></circle-progress>
 
-  <ion-fab  vertical="top" horizontal="start" slot="fixed">
-
-  <ion-fab-button (click)='hardReset();'>
-    <ion-icon name="refresh-outline"></ion-icon>
-  </ion-fab-button>
-
-  </ion-fab>
-  <ion-fab *ngIf='stopwatchService.isResetted' vertical="top" horizontal="end" slot="fixed">
-
-    <ion-fab-button (click)='picker.open();'>
-      <ion-icon name="cog-outline" ></ion-icon>
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-back-button defaultHref="/"></ion-back-button>
     </ion-fab-button>
-
   </ion-fab>
 
-  <div  *ngIf='stopwatchService.isResetted' class="container">
-    <ion-button [color]='type===0? "primary":"secondary"' (click)='type=0' class="half-width" size='large'>COUNT DOWN</ion-button>
-    <ion-button [color]='type===1? "primary":"secondary"' (click)='type=1' class="half-width" size='large'>COUNT UP</ion-button>
+  <ion-fab *ngIf='stopwatchService.isResetted' vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)='picker.open();'>
+      <ion-icon name="cog-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div *ngIf='stopwatchService.isResetted' class="container">
+    <ion-button [color]='type===0? "primary":"secondary"' (click)='type=0' class="half-width" size='large'>COUNT
+      DOWN</ion-button>
+    <ion-button [color]='type===1? "primary":"secondary"' (click)='type=1' class="half-width" size='large'>COUNT
+      UP</ion-button>
   </div>
 
-
-  <ion-button *ngIf='stopwatchService.isResetted' size='large' expand='block'(click)='startTimer()' >START
-    <ion-ripple-effect  type="bounded"></ion-ripple-effect>
+  <div class="refresh-btn">
+    <div></div>
+    <ion-fab-button (click)="hardReset()">
+      <ion-icon name="refresh-outline"></ion-icon>
+    </ion-fab-button>
+  </div>
+  <ion-button *ngIf='stopwatchService.isResetted' size='large' expand='block' (click)='startTimer()'>START
+    <ion-ripple-effect type="bounded"></ion-ripple-effect>
   </ion-button>
 
-  <ion-button *ngIf='stopwatchService.isStarted' size='large' expand='block'(click)='stopTimer()' >STOP
+  <ion-button *ngIf='stopwatchService.isStarted' size='large' expand='block' (click)='stopTimer()'>STOP
     <ion-ripple-effect type="bounded"></ion-ripple-effect>
   </ion-button>
 
@@ -60,7 +50,7 @@
       <ion-ripple-effect type="bounded"></ion-ripple-effect>
     </ion-button>
 
-    <ion-button  color='primary' size='large' expand='block'  (click)='resume()'>RESUME
+    <ion-button color='primary' size='large' expand='block' (click)='resume()'>RESUME
       <ion-ripple-effect type="bounded"></ion-ripple-effect>
     </ion-button>
 
@@ -78,7 +68,7 @@
   </div> -->
 
 
-    <!-- <circle-progress
+  <!-- <circle-progress
     [percent]="85"
     [radius]="100"
     [outerStrokeWidth]="8"
@@ -91,7 +81,8 @@
 
 </ng-container>
 
-<ng-container  *ngIf='is_landscape'>
-  <p class='stop-watch-time landscape'><span class="lapno">{{type==0?'DN':'UP'}}</span>{{timer * 1000 | date:'mm:ss':'UTC'}}</p>
+<ng-container *ngIf='is_landscape'>
+  <p class='stop-watch-time landscape'><span class="lapno">{{type==0?'DN':'UP'}}</span>{{timer * 1000 |
+    date:'mm:ss':'UTC'}}</p>
 
 </ng-container>
