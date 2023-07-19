@@ -13,23 +13,9 @@
   <ion-item>
     <ion-searchbar slot="start" class="custom-searchbar"></ion-searchbar>
   </ion-item>
-  <ion-item class="workout-items" lines="none" button detail="false" (click)='goTo("workout-detail")'>
-    <ion-label>AMRAP</ion-label>
-    <p slot="end">7/13/23</p>
-    <p slot="end">14:29</p>
-  </ion-item>
-  <ion-item class="workout-items" lines="none" button detail="false" (click)='goTo("workout-detail")'>
-    <ion-label>FOR TIME</ion-label>
-    <p slot="end">7/13/22</p>
-    <p slot="end">12:29</p>
-  </ion-item>
-  <ion-item class="workout-items" lines="none" button detail="false" (click)='goTo("workout-detail")'>
-    <ion-label>ENOM</ion-label>
-    <p slot="end">7/13/23</p>
-    <p slot="end">11:29</p>
-  </ion-item>
-  <ion-item class="workout-items" lines="none" button detail="false" (click)='goTo("workout-detail")'>
-    <ion-label>TABATA</ion-label>
+  <ion-item *ngFor="let item of workout" class="workout-items" lines="none" button detail="false"
+    (click)='goTo("workout-detail",item.id)'>
+    <ion-label>{{item.title}}</ion-label>
     <p slot="end">7/13/23</p>
     <p slot="end">14:29</p>
   </ion-item>

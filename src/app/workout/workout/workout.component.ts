@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Interval } from 'src/app/shared-module/Models/allInterval.Modal';
+import { SaveStateService } from 'src/app/shared-module/services/save-state.service';
 @Component({
   selector: 'app-workout',
   templateUrl: './workout.component.html',
@@ -7,12 +9,14 @@ import { Router } from '@angular/router';
 })
 export class WorkoutComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, private saveState: SaveStateService) { }
+  workout: Interval[];
   ngOnInit() {
+    this.workout = this.saveState.getWorkoutLog();
   }
 
-  goTo(tabName: string) {
-    this.router.navigate([`/home/workout/${tabName}`])
+  goTo(tabName: string, id: string) {
+    this.router.navigate(['/home/workout', tabName], { queryParams: { id: id } });
   }
 
 }
