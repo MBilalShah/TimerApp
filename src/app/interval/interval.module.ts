@@ -15,11 +15,12 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { SharedModuleModule } from '../shared-module/shared-module.module';
 import { OptionsMenuComponent } from './options-menu/options-menu.component';
 import { LoopPopupComponent } from './loop-popup/loop-popup.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 @NgModule({
   declarations: [
     IntervalComponent,
-    IntervalFormComponent,IntervalTimerComponent,OptionsMenuComponent,LoopPopupComponent
+    IntervalFormComponent, IntervalTimerComponent, OptionsMenuComponent, LoopPopupComponent, ConfigurationComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +30,7 @@ import { LoopPopupComponent } from './loop-popup/loop-popup.component';
     ReactiveFormsModule,
     IonicStorageModule.forRoot({
       name: '__mydb',
-driverOrder: ['indexeddb', 'sqlite', 'websql']
+      driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     NgCircleProgressModule.forRoot({
       // set defaults here
@@ -42,7 +43,7 @@ driverOrder: ['indexeddb', 'sqlite', 'websql']
       responsive: true,
       renderOnClick: false
     }),
-  ],providers:[
+  ], providers: [
     ScreenOrientation,
 
   ]

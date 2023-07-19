@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController, PopoverController } from '@ionic/angular';
 import { from } from 'rxjs';
 import { IntervalFormComponent } from '../interval-form/interval-form.component';
-import {Storage as storageClass} from '@ionic/storage'
+import { Storage as storageClass } from '@ionic/storage'
 import { Router } from '@angular/router';
 import { generateId } from 'src/app/shared-module/helper';
 import { Interval, IntervalForm } from 'src/app/shared-module/Models/Interval.Model';
@@ -15,11 +15,11 @@ import { LoopPopupComponent } from '../loop-popup/loop-popup.component';
 })
 export class IntervalComponent implements OnInit {
 
-  constructor(public modalController: ModalController,private storage:storageClass,private alertController:AlertController,private router:Router,private popoverController:PopoverController) { }
+  constructor(public modalController: ModalController, private storage: storageClass, private alertController: AlertController, private router: Router, private popoverController: PopoverController) { }
 
-  intervals:any[]=[]
+  intervals: any[] = []
 
- async ngOnInit() {
+  async ngOnInit() {
 
     this.intervals = await this.storage.get('intervals') || []
 
@@ -27,7 +27,7 @@ export class IntervalComponent implements OnInit {
   }
 
 
-  async addInterval(){
+  async addInterval() {
     const modal = await this.modalController.create({
       component: IntervalFormComponent,
       cssClass: 'my-custom-class',
@@ -38,20 +38,20 @@ export class IntervalComponent implements OnInit {
 
     const { data } = await modal.onWillDismiss();
     console.log(data);
-    if(!data){return}
+    if (!data) { return }
     // data.id=generateId()
     this.intervals.push(data);
 
     this.storage.set('intervals', this.intervals)
   }
 
-  async editInterval(index){
+  async editInterval(index) {
     const modal = await this.modalController.create({
       component: IntervalFormComponent,
       cssClass: 'my-custom-class',
-      componentProps:{
-        'editMode':true,
-        'interval':this.intervals[index]
+      componentProps: {
+        'editMode': true,
+        'interval': this.intervals[index]
       }
     });
 
@@ -60,60 +60,59 @@ export class IntervalComponent implements OnInit {
     const { data } = await modal.onWillDismiss();
     console.log(data);
 
-    if(!data){return}
-    this.intervals[index]=data;
+    if (!data) { return }
+    this.intervals[index] = data;
 
     this.storage.set('intervals', this.intervals)
   }
 
- async deleteInterval(index:number){
+  async deleteInterval(index: number) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Confirmation',
       subHeader: 'Delete Interval',
       message: 'Are you sure you want to delete this interval permanantly?.',
       buttons: [{
-        text:'Cancel',
-        role:'cancel'
+        text: 'Cancel',
+        role: 'cancel'
       }
-    ,
-  {
-    text:'Delete',
-    handler:()=>{
-      this.intervals.splice(index,1)
-      this.storage.set('intervals', this.intervals)
-    }
-  }]
+        ,
+      {
+        text: 'Delete',
+        handler: () => {
+          this.intervals.splice(index, 1)
+          this.storage.set('intervals', this.intervals)
+        }
+      }]
     })
 
     await alert.present();
   }
 
-  openTimer(interval:IntervalForm){
+  openTimer(interval: IntervalForm) {
     this.router.navigate([`home/interval/interval-timer/${interval.id}`])
-
   }
 
-  async openMenu(ev,index){
+  async openMenu(ev, index) {
 
     const popover = await this.popoverController.create({
       component: OptionsMenuComponent,
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true,
-      componentProps:{
-        $delete:()=>{
+      componentProps: {
+        $delete: () => {
           this.popoverController.dismiss()
           this.deleteInterval(index)
         },
-        edit:()=>{
+        edit: () => {
           this.popoverController.dismiss()
           this.editInterval(index)
         },
-        copy:()=>{
+        copy: () => {
           this.popoverController.dismiss()
-          const data= {...this.intervals[index]}
-          data.title= data.title + '-copy'
+          const data = { ...this.intervals[index] }
+          data.title = data.title + '-copy'
           this.intervals.push(data);
 
           this.storage.set('intervals', this.intervals)
@@ -123,13 +122,13 @@ export class IntervalComponent implements OnInit {
     return await popover.present();
   }
 
-  async loopWorkout(interval_id:string){
+  async loopWorkout(interval_id: string) {
     console.log('click')
     const modal = await this.modalController.create({
       component: LoopPopupComponent,
       cssClass: 'my-custom-class',
-      componentProps:{
-        interval_id:interval_id
+      componentProps: {
+        interval_id: interval_id
       }
     });
 
@@ -137,7 +136,7 @@ export class IntervalComponent implements OnInit {
 
     const { data } = await modal.onWillDismiss();
     console.log(data);
-    if(!data){return}
+    if (!data) { return }
     // data.id=generateId()
     this.intervals.push(data);
 

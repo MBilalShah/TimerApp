@@ -8,15 +8,19 @@
   <ion-list class="home-list">
     <h3>TimerWOD</h3>
     <p>Timer</p>
-    <ion-button class="counter" shape="round" (click)='goTo("counter")'>
+    <!-- <ion-button class="counter" shape="round" (click)='goTo("counter")'>
       <ion-icon name="speedometer-outline"></ion-icon>
       <ion-label>Counter</ion-label>
-    </ion-button>
+    </ion-button> -->
     <ion-button class="for-time" shape="round" (click)='goTo("stopwatch")'>
       <ion-icon name="stopwatch-outline"></ion-icon>
       <ion-label>For Time</ion-label>
     </ion-button>
-    <ion-button class="amrap" shape="round" (click)='goTo("interval")'>
+
+    <ion-button (click)="openInterval(interval)" *ngFor="let interval of intervals">
+      <ion-label>{{interval.title}}</ion-label>
+    </ion-button>
+    <!-- <ion-button class="amrap" shape="round" (click)='goTo("interval")'>
       <ion-icon name="infinite-outline"></ion-icon>
       <ion-label>AMRAP</ion-label>
     </ion-button>
@@ -27,7 +31,7 @@
     <ion-button class="tabata" shape="round" (click)='goTo("interval")'>
       <ion-icon name="infinite-outline"></ion-icon>
       <ion-label>Tabata</ion-label>
-    </ion-button>
+    </ion-button> -->
     <div class="worklog" (click)='goTo("workout")'>
       <ion-icon name="infinite-outline"></ion-icon>&nbsp;&nbsp;<p>WORKOUT LOG</p>
     </div>
