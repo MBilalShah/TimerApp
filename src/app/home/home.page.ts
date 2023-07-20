@@ -43,7 +43,6 @@ export class HomePage {
 
     const current_keys = await this.storage.keys()
     const exists = current_keys.includes('intervals')
-
     if (!exists) {
       this.storage.set('intervals', [
         { "title": "TABATA", "workoutTime": "00:00:20", "restTime": "00:00:10", "rounds": 8, "default": true, "id": IntervalId.TABATA, noOfLoops: 1, timeBetweenLoops: '00:00:00' }
@@ -95,33 +94,19 @@ export class HomePage {
     const modal = await this.modalController.create({
       component: ConfigurationComponent,
       cssClass: 'my-custom-class',
+      componentProps: { interval: interval } 
     });
-
     modal.present();
-
     const data = await modal.onDidDismiss();
-
-    const { rounds, workoutTime, restTime } = data.data
-
-    /**
-     *
-     * set interval and save it
-     *
-     * interval.rounds = rounds
-     * interval.workoutTime = workoutTime
-     * interval.restTime = restTime
-     *
-     * intervals
-     *
-     * this.storage.set("intervals", this.intervals)
-     *
-     *  */
-    this.router.navigate([`home/interval/interval-timer/${interval.id}`])
-
-    // if (interval.id === IntervalId.AMRAP) {
-    //   return;
-    // }
-
-    // this.router.navigate([`home/interval/interval-timer/${interval.id}`])
+    if (data.data) {
+      const { rounds, workoutTime, restTime } = data.data
+      interval.rounds = rounds;
+      interval.workoutTime = workoutTime;
+      interval.restTime = restTime;
+      this.storage.set("intervals", this.intervals)
+      this.router.navigate([`home/interval/interval-timer/${interval.id}`])
+    } else {
+      window.location.reload();
+    }
   }
 }

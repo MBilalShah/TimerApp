@@ -6,6 +6,7 @@ import { StopwatchServiceService } from 'src/app/shared-module/services/stopwatc
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Subscription } from 'rxjs';
 import { SaveStateService } from 'src/app/shared-module/services/save-state.service';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-interval-timer',
@@ -14,8 +15,9 @@ import { SaveStateService } from 'src/app/shared-module/services/save-state.serv
 })
 export class IntervalTimerComponent implements OnInit {
 
-  constructor(public stopwatchService: StopwatchServiceService, private acRoute: ActivatedRoute, private storage: Storage, private orientation: ScreenOrientation, private saveStateService: SaveStateService, private ngZone: NgZone) {
+  constructor(public stopwatchService: StopwatchServiceService, private acRoute: ActivatedRoute, private storage: Storage, private orientation: ScreenOrientation, private saveStateService: SaveStateService, private ngZone: NgZone, private toastController: ToastController) {
 
+    this.getState();
   }
 
   isCompleted: boolean = false
@@ -31,9 +33,7 @@ export class IntervalTimerComponent implements OnInit {
   restTime: string = "00:00:00"
   roundNo: number = 1;
   intervalType: IntervalType = IntervalType.workout;
-  // saveState(){
-  //   this.saveState
-  // }
+  workoutLog: any[] = [];
 
   ionViewDidEnter() {
 
@@ -91,6 +91,7 @@ export class IntervalTimerComponent implements OnInit {
     }
   }
   async ngOnInit() {
+    this.workoutLog = await this.saveStateService.getWorkoutLog();
     console.log('timer 1:', this.timer),
       this.onOrientationChange()
     this.orientation.onChange().subscribe(data => {
@@ -148,14 +149,6 @@ export class IntervalTimerComponent implements OnInit {
 
   timerListener(timer) {
     const activeInterval: Interval = this.intervals[this.activeIndex]
-    // activeInterval.time==0? this.activeIndex=this.activeIndex+1:null;
-    // if(activeInterval.time==0){
-
-    //   this.stopwatchService.timerVal=this.stopwatchService.timerVal+1
-    //   // this.stopwatchService.resetTimer()
-    //   // this.activeIndex=this.activeIndex+1
-    //   // return;
-    // }
     this.timer = timer;
 
     this.percentage = (this.timer / activeInterval.time) * 100
@@ -210,11 +203,6 @@ export class IntervalTimerComponent implements OnInit {
       }))
     }
 
-    // if(this.activeIndex>this.intervals.length -1){
-    //   this.stopTimer()
-    //   this.reset()
-    //   this.subscription.unsubscribe()
-    // }
     this.saveState()
   }
 
@@ -232,19 +220,26 @@ export class IntervalTimerComponent implements OnInit {
   }
 
   delayOneSecond(callback) {
-    // callback()
     setTimeout(() => {
       callback()
     }, 1000);
   }
-  stopTimer() {
-    console.log('timer 1:', this.timer),
+  async stopTimer() {
+    const toast = await this.toastController.create({
+      message: 'Workout Done and Saved!',
+      duration: 2000,
+      position: 'top'
+    });
+    await toast.present();
+    toast.onDidDismiss().then(() => {
+      this.workoutLog.push(this.int);
+      console.log(this.workoutLog);
+      this.saveStateService.saveWorkoutLog(this.workoutLog);
       this.stopwatchService.stopTimer()
-    // this.subscription? this.subscription.unsubscribe():null;
+    });
   }
 
   resume() {
-    // this.stopwatchService.startTimer()
     this.stopwatchService.resumeTimer()
   }
 
@@ -259,12 +254,10 @@ export class IntervalTimerComponent implements OnInit {
   }
 
   ceiling(val) {
-    // return val;
     return Math.ceil(val)
   }
 
   floor(val) {
-    // return val;
     return Math.floor(val)
   }
   ionViewDidLeave() {
@@ -274,13 +267,6 @@ export class IntervalTimerComponent implements OnInit {
     this.saveState()
     this.stopwatchService.unloadFiles()
   }
-  // getRoundNumber(){
-
-  //   this.delayOneSecond(()=>{
-  //     this.roundNo= (this.floor((this.activeIndex/2))%(this.floor( this.ceiling(this.intervals.length / 2)/this.noOfLoops)))+1
-
-  //   })
-
 
 
 

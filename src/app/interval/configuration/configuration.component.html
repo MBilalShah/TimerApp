@@ -1,18 +1,47 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/" (click)="onBack()"></ion-back-button>
+  </ion-buttons>
+  <ion-title>{{interval.title}}</ion-title>
+</ion-toolbar>
 <ion-content>
-  <ion-label>Number of Rounds</ion-label>
-  <ion-button id="open-picker">Open</ion-button>
-  <ion-picker trigger="open-picker" [columns]="numberColumns" [buttons]="pickerButtons"></ion-picker>
-</ion-content>
+  <ion-item class="workout-items" lines="full">
+    <ion-label>Number of Rounds</ion-label>
+    <ion-button class="value-items" *ngIf="rounds" slot="end" fill="outline" id="open-picker">
+      {{rounds}}
+    </ion-button>
+    <ion-button class="value-items" *ngIf="!rounds" slot="end" id="open-picker">
+      Set Rounds
+    </ion-button>
+    <ion-picker trigger="open-picker" [columns]="numberOfRounds" [buttons]="numberOfRoundsButtons"></ion-picker>
+  </ion-item>
+  <ion-item class="workout-items" lines="full">
+    <ion-label>Workout Time</ion-label>
+    <ion-button class="value-items" *ngIf="workoutTime" fill="outline" slot="end" id="open-picker1">
+      <p>{{workoutTime}}</p>
+    </ion-button>
+    <ion-button class="value-items" *ngIf="!workoutTime" slot="end" id="open-picker1">
+      Set time
+    </ion-button>
+    <ion-picker trigger="open-picker1" [columns]="workoutTimes" [buttons]="workoutTimesButtons"></ion-picker>
+  </ion-item>
+  <ion-item class="workout-items" lines="full">
+    <ion-label>Rest Time</ion-label>
+    <ion-button class="value-items" *ngIf="restTime" fill="outline" slot="end" id="open-picker2">
+      {{restTime}}
+    </ion-button>
+    <ion-button class="value-items" *ngIf="!restTime" slot="end" id="open-picker2">
+      Set Rest
+    </ion-button>
+    <ion-picker trigger="open-picker2" [columns]="restTimes" [buttons]="restTimesButtons"></ion-picker>
+  </ion-item>
+  <div class="close-section">
+    <div class="close-btn" [ngClass]="{ 'close-btn-disable':  !restTime || !workoutTime || !rounds}" (click)="dismisModal()">
+      Save &nbsp;
+      <ion-icon name="save">
 
+      </ion-icon>
+    </div>
 
-<ion-content>
-  <ion-label>Workout Time</ion-label>
-  <ion-button id="open-picker1">Open</ion-button>
-  <ion-picker trigger="open-picker1" [columns]="pickerColumns" [buttons]="pickerButtons"></ion-picker>
-</ion-content>
-
-<ion-content>
-  <ion-label>Rest Time</ion-label>
-  <ion-button id="open-picker2">Open</ion-button>
-  <ion-picker trigger="open-picker2" [columns]="pickerColumns" [buttons]="pickerButtons"></ion-picker>
+  </div>
 </ion-content>

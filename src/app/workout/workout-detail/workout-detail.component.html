@@ -2,7 +2,7 @@
   <ion-buttons slot="start">
     <ion-back-button defaultHref="/"></ion-back-button>
   </ion-buttons>
-  <ion-title>SmartWood</ion-title>
+  <ion-title>{{workoutDetail?.title}}</ion-title>
   <ion-buttons slot="primary">
     <ion-button>
       <ion-icon slot="start" name="download"></ion-icon>
@@ -11,43 +11,42 @@
   </ion-buttons>
 </ion-toolbar>
 <ion-content>
-  <!-- *ngIf="fields.showTime.includes(id)" -->
   <ion-item class="workout-items" lines="full">
     <b slot="start">Date</b>
     <p fill="outline" slot="end">7/13/23</p>
   </ion-item>
-  <ion-item *ngIf="'EMOM' != workoutDetail.title" class="workout-items" lines="full">
+  <ion-item *ngIf="'EMOM' != workoutDetail?.title" class="workout-items" lines="full">
     <b slot="start">Total time</b>
-    <p fill="outline" slot="end">{{workoutDetail.workoutTime}}</p>
+    <p fill="outline" slot="end">{{workoutDetail?.workoutTime}}</p>
   </ion-item>
-  <ion-item *ngIf="'EMOM'=== workoutDetail.title" class="workout-items" lines="full">
+  <ion-item *ngIf="'EMOM'=== workoutDetail?.title" class="workout-items" lines="full">
     <b slot="start">Every</b>
     <p fill="outline" slot="end">ev</p>
   </ion-item>
-  <ion-item *ngIf="'EMOM'=== workoutDetail.title" class="workout-items" lines="full">
+  <ion-item *ngIf="'EMOM'=== workoutDetail?.title" class="workout-items" lines="full">
     <b slot="start">For</b>
     <p fill="outline" slot="end">for</p>
   </ion-item>
-  <ion-item *ngIf="workoutDetail.rounds" class="workout-items" lines="full">
+  <ion-item *ngIf="workoutDetail?.rounds" class="workout-items" lines="full">
     <b slot="start">Rounds</b>
     <p fill="outline" slot="end">{{workoutDetail?.rounds}}</p>
   </ion-item>
-  <ion-item *ngIf="workoutDetail.round" class="workout-items" lines="full">
+  <ion-item *ngIf="workoutDetail?.round" class="workout-items" lines="full">
     <div>
-      <div class="round-list" *ngFor="let round of workoutDetail.round">
-        <b>{{round.noRounds}}</b>
-        <p>{{round.timeBetween}}</p>
+      <div class="round-list" *ngFor="let round of workoutDetail?.round">
+        <b>{{round?.noRounds}}</b>
+        <p>{{round?.timeBetween}}</p>
       </div>
       <p slot="bottom">Time left over 00:20 / aditional reps:200</p>
     </div>
   </ion-item>
-  <ion-item *ngIf="'TABATA'=== workoutDetail.title" class="workout-items" lines="full">
+  <ion-item *ngIf="'TABATA'=== workoutDetail?.title" class="workout-items" lines="full">
     <b slot="start">Work</b>
-    <p fill="outline" slot="end">{{workoutDetail.workoutTime}}</p>
+    <p fill="outline" slot="end">{{workoutDetail?.workoutTime}}</p>
   </ion-item>
-  <ion-item *ngIf="'TABATA'=== workoutDetail.title" class="workout-items" lines="full">
+  <ion-item *ngIf="'TABATA'=== workoutDetail?.title" class="workout-items" lines="full">
     <b slot="start">Rest</b>
-    <p fill="outline" slot="end">{{workoutDetail.restTime}}</p>
+    <p fill="outline" slot="end">{{workoutDetail?.restTime}}</p>
   </ion-item>
   <ion-item lines="none" class="workout-inputs">
     <ion-input placeholder="Additional reps"></ion-input>

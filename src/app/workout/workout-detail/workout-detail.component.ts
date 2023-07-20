@@ -13,17 +13,18 @@ export class WorkoutDetailComponent implements OnInit {
   id = '';
 
   constructor(private route: ActivatedRoute, private saveState: SaveStateService) { }
-  ngOnInit() {
+  async ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.id = params['id'];
-      const workoutLog = this.saveState.getWorkoutLog();
-      this.workoutDetail = workoutLog.find(obj => obj.id === this.id);
-      if (this.workoutDetail) {
-        console.log('Found Object:', this.workoutDetail);
-      } else {
-        console.log('Object not found');
-      }
     });
+    const workoutLog = await this.saveState.getWorkoutLog();
+    console.log('work', workoutLog);
+    this.workoutDetail = workoutLog.find(obj => obj.id == this.id);
+    if (this.workoutDetail) {
+      console.log('Found Object:', this.workoutDetail);
+    } else {
+      console.log('Object not found');
+    }
   }
 
 }

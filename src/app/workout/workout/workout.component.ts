@@ -11,8 +11,8 @@ export class WorkoutComponent implements OnInit {
 
   constructor(public router: Router, private saveState: SaveStateService) { }
   workout: Interval[];
-  ngOnInit() {
-    this.workout = this.saveState.getWorkoutLog();
+  async ngOnInit() {
+    this.workout = await this.saveState.getWorkoutLog();
   }
 
   goTo(tabName: string, id: string) {

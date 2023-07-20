@@ -123,7 +123,10 @@ export class SaveStateService {
     return this.storage.get(screen)
   }
   getWorkoutLog() {
-    return this.workoutSave;
+    return this.storage.get('workout');
+  }
+  saveWorkoutLog(data: any[]) {
+    this.storage.set('workout', data);
   }
 }
 

@@ -31,14 +31,14 @@
   font-weight: bold;
 }
 
-.time{
+.time {
   margin: auto;
   font-family: 'digital-7';
   font-size: 22vw;
   color: #FB331A;
 }
 
-.stop-watch-time{
+.stop-watch-time {
   font-family: 'digital-7';
   font-size: 33vw;
   color: #FB331A;
@@ -47,7 +47,7 @@
   margin-top: 55px;
 }
 
-.countdown-text{
+.countdown-text {
   font-family: 'digital-7';
   color: #FB331A;
 }
@@ -60,16 +60,16 @@ ion-toggle {
   --handle-background-checked: gray;
 }
 
-ion-fab-button{
-  color:#FB331A
+ion-fab-button {
+  color: #FB331A
 }
 
-.landscape{
-  margin:auto;
-  font-size:29vw;
+.landscape {
+  margin: auto;
+  font-size: 29vw;
 }
 
-.lapno{
+.lapno {
   color: #2D92F8;
   margin-right: 30px;
   // display: inline-flex;
@@ -80,13 +80,14 @@ ion-fab-button{
   //   font-size: 7vw;
 }
 
-ion-button{
-  margin:0px 20px 20px 20px;
+ion-button {
+  margin: 0px 20px 20px 20px;
 }
 
-ion-fab{
-  margin-top:30px
+ion-fab {
+  margin-top: 30px
 }
+
 // .picker-toolbar.sc-ion-picker-ios{
 //   border-bottom: 0px;
 // }
@@ -119,6 +120,10 @@ ion-fab{
 //   font-size: 20px;
 // }
 
-.picker-opt{
-  font-size: 27px;  //change size depend your Requirement
+.picker-opt {
+  font-size: 27px; //change size depend your Requirement
+}
+
+.ion-page {
+  color: #fff;
 }
