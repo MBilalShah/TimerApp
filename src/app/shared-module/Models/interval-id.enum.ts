@@ -1,7 +1,6 @@
 export enum IntervalId {
+  FORTIME = "asd213c213123c11",
   TABATA = "asd213c213123c12",
-  FGB1 = "asd213c213123c13",
-  FGB2 = "asd213c213123c14",
-  EMOM20 = "asd213c213123c15",
-  AMRAP = "asd213c213123c16"
+  EMOM20 = "asd213c213123c13",
+  AMRAP = "asd213c213123c14"
 }

@@ -227,7 +227,7 @@ export class IntervalTimerComponent implements OnInit {
   async stopTimer() {
     const toast = await this.toastController.create({
       message: 'Workout Done and Saved!',
-      duration: 2000,
+      duration: 3000,
       position: 'top'
     });
     await toast.present();

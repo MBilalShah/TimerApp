@@ -18,13 +18,7 @@ export class WorkoutDetailComponent implements OnInit {
       this.id = params['id'];
     });
     const workoutLog = await this.saveState.getWorkoutLog();
-    console.log('work', workoutLog);
     this.workoutDetail = workoutLog.find(obj => obj.id == this.id);
-    if (this.workoutDetail) {
-      console.log('Found Object:', this.workoutDetail);
-    } else {
-      console.log('Object not found');
-    }
   }
 
 }

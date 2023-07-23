@@ -11,12 +11,24 @@
 </ion-toolbar>
 <ion-content>
   <ion-item>
-    <ion-searchbar slot="start" class="custom-searchbar"></ion-searchbar>
+    <ion-searchbar slot="start" class="custom-searchbar" (input)="onSearch($event)"></ion-searchbar>
   </ion-item>
-  <ion-item *ngFor="let item of workout" class="workout-items" lines="none" button detail="false"
-    (click)='goTo("workout-detail",item.id)'>
-    <ion-label>{{item.title}}</ion-label>
-    <p slot="end">7/13/23</p>
-    <p slot="end">14:29</p>
-  </ion-item>
+  <div *ngIf="!filteredWorkout?.length && !search">
+    <ion-item *ngFor="let item of workout ; let i =index" class="workout-items" lines="none" button detail="false"
+      (click)='goTo("workout-detail",item.id)'>
+      <ion-label slot="start">{{item.title}}</ion-label>
+      <p slot="start">7/13/23</p>&nbsp;
+      <p slot="start">14:29</p>
+      <ion-icon slot="end" name="trash" color="danger" (click)="deleteWorkout(i)"></ion-icon>
+    </ion-item>
+  </div>
+  <div *ngIf="filteredWorkout?.length">
+    <ion-item *ngFor="let item of filteredWorkout; let i = index" class="workout-items" lines="none" button
+      detail="false" (click)='goTo("workout-detail",item.id)'>
+      <ion-label slot="start">{{item.title}}</ion-label>
+      <p slot="start">7/13/23</p>&nbsp;
+      <p slot="start">14:29</p>
+      <ion-icon slot="end" name="trash" color="danger" (click)="deleteWorkout(i)"></ion-icon>
+    </ion-item>
+  </div>
 </ion-content>

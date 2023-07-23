@@ -8,6 +8,7 @@ export interface Interval {
   noOfLoops: number;
   timeBetweenLoops: string;
   date?: string;
+  time: string;
   every?: string;
   for?: string;
 }

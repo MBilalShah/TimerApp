@@ -13,60 +13,15 @@
       <ion-label>Counter</ion-label>
     </ion-button> -->
     <ion-button class="for-time" shape="round" (click)='goTo("stopwatch")'>
-      <ion-icon name="stopwatch-outline"></ion-icon>
       <ion-label>For Time</ion-label>
     </ion-button>
-
     <ion-button (click)="openInterval(interval)" *ngFor="let interval of intervals;let i = index"
       [ngClass]="{ 'first': i === 0 ,'second': i === 1 , 'third': i === 2 , 'fourth': i === 3 , 'fivth': i === 4}"
       shape="round">
       <ion-label>{{interval.title}}</ion-label>
     </ion-button>
-    <!-- <ion-button class="amrap" shape="round" (click)='goTo("interval")'>
-      <ion-icon name="infinite-outline"></ion-icon>
-      <ion-label>AMRAP</ion-label>
-    </ion-button>
-    <ion-button class="emom" shape="round" (click)='goTo("interval")'>
-      <ion-icon name="infinite-outline"></ion-icon>
-      <ion-label>EMOM</ion-label>
-    </ion-button>
-    <ion-button class="tabata" shape="round" (click)='goTo("interval")'>
-      <ion-icon name="infinite-outline"></ion-icon>
-      <ion-label>Tabata</ion-label>
-    </ion-button> -->
-    <div class="worklog" (click)='goTo("workout")'>
+    <div class="worklog" (click)='goToWorkout("workout")'>
       <ion-icon name="infinite-outline"></ion-icon>&nbsp;&nbsp;<p>WORKOUT LOG</p>
     </div>
   </ion-list>
-
-
-  <!-- <ion-tabs>
-    <ion-tab-bar color='secondary' slot="bottom" [class.tabs-item-hide]='is_landscape'>
-      <ion-tab-button (click)='goTo("clock")' tab="clock">
-        <ion-icon [color]="router.url.includes('clock')?'primary':'tertiary'" name="alarm-outline"></ion-icon>
-        <ion-label [color]="router.url.includes('clock')?'primary':'tertiary'">Clock</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button (click)='goTo("stopwatch")' tab="stopwatch">
-        <ion-icon [color]="router.url.includes('stopwatch')?'primary':'tertiary'" name="stopwatch-outline"></ion-icon>
-        <ion-label [color]="router.url.includes('stopwatch')?'primary':'tertiary'">Stopwatch</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="counter" (click)='goTo("counter")'>
-        <ion-icon [color]="router.url.includes('counter')?'primary':'tertiary'" name="speedometer-outline"></ion-icon>
-        <ion-label [color]="router.url.includes('counter')?'primary':'tertiary'">Counter</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="interval" (click)='goTo("interval")'>
-        <ion-icon [color]="router.url.includes('interval')?'primary':'tertiary'" name="infinite-outline"></ion-icon>
-        <ion-label [color]="router.url.includes('interval')?'primary':'tertiary'">Interval</ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button tab="settings" (click)='goTo("settings")'>
-        <ion-icon [color]="router.url.includes('settings')?'primary':'tertiary'" name="cog-outline"></ion-icon>
-        <ion-label [color]="router.url.includes('settings')?'primary':'tertiary'">Settings</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-
-  </ion-tabs> -->
 </ion-content>

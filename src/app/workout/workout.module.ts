@@ -5,6 +5,8 @@ import { WorkoutComponent } from './workout/workout.component';
 import { IonicModule } from '@ionic/angular';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { WorkoutDetailComponent } from './workout-detail/workout-detail.component';
+import { SharedModuleModule } from '../shared-module/shared-module.module';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     WorkoutComponent,
@@ -13,7 +15,9 @@ import { WorkoutDetailComponent } from './workout-detail/workout-detail.componen
   imports: [
     CommonModule,
     WorkoutRoutingModule,
-    IonicModule
+    IonicModule,
+    SharedModuleModule,
+    FormsModule
   ],
   providers: [ScreenOrientation]
 })

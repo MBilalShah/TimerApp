@@ -5,16 +5,16 @@ import { StopWatchRoutingModule } from './stop-watch-routing.module';
 import { IonicModule } from '@ionic/angular';
 import { StopwatchComponent } from './stopwatch/stopwatch.component';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-
+import { ConfigurationComponentComponent } from './configuration-component/configuration-component.component';
 
 @NgModule({
-  declarations: [StopwatchComponent],
+  declarations: [StopwatchComponent, ConfigurationComponentComponent],
   imports: [
     CommonModule,
     StopWatchRoutingModule,
     IonicModule,
 
 
-  ],providers:[  ScreenOrientation]
+  ], providers: [ScreenOrientation]
 })
 export class StopWatchModule { }

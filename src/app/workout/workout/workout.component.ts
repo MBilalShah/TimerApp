@@ -8,15 +8,38 @@ import { SaveStateService } from 'src/app/shared-module/services/save-state.serv
   styleUrls: ['./workout.component.scss'],
 })
 export class WorkoutComponent implements OnInit {
-
+  search: boolean = false;
   constructor(public router: Router, private saveState: SaveStateService) { }
   workout: Interval[];
+  filteredWorkout: Interval[];
   async ngOnInit() {
-    this.workout = await this.saveState.getWorkoutLog();
+    try {
+      this.workout = await this.saveState.getWorkoutLog();
+      this.filterWorkout('');
+    } catch (error) {
+      console.error('Error loading workout data:', error);
+    }
   }
 
   goTo(tabName: string, id: string) {
     this.router.navigate(['/home/workout', tabName], { queryParams: { id: id } });
   }
 
+  deleteWorkout(id: number) {
+    this.workout.splice(id, 1);
+    this.saveState.saveWorkoutLog(this.workout);
+    this.filterWorkout('');
+  }
+
+  onSearch(event: any) {
+    this.search = true;
+    const searchText = event.target.value.toLowerCase();
+    this.filterWorkout(searchText);
+  }
+
+  private filterWorkout(searchText: string) {
+    this.filteredWorkout = this.workout.filter(
+      (item) => item.title.toLowerCase().includes(searchText)
+    );
+  }
 }
