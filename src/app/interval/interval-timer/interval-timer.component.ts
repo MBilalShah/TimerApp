@@ -147,7 +147,7 @@ export class IntervalTimerComponent implements OnInit {
   // isRest:boolean=false;
 
 
-  timerListener(timer) {
+  async timerListener(timer) {
     const activeInterval: Interval = this.intervals[this.activeIndex]
     this.timer = timer;
 
@@ -177,6 +177,18 @@ export class IntervalTimerComponent implements OnInit {
         this.stopTimer()
         this.reset()
         this.subscription.unsubscribe()
+        const toast = await this.toastController.create({
+          message: 'Workout Done and Saved!',
+          duration: 3000,
+          position: 'top'
+        });
+        await toast.present();
+        toast.onDidDismiss().then(() => {
+          this.workoutLog.push(this.int);
+          console.log('this.int', this.int)
+          console.log(this.workoutLog);
+          this.saveStateService.saveWorkoutLog(this.workoutLog);
+        });
         this.stopwatchService.playSound('bell')
         this.isCompleted = true;
         return;
@@ -225,18 +237,7 @@ export class IntervalTimerComponent implements OnInit {
     }, 1000);
   }
   async stopTimer() {
-    const toast = await this.toastController.create({
-      message: 'Workout Done and Saved!',
-      duration: 3000,
-      position: 'top'
-    });
-    await toast.present();
-    toast.onDidDismiss().then(() => {
-      this.workoutLog.push(this.int);
-      console.log(this.workoutLog);
-      this.saveStateService.saveWorkoutLog(this.workoutLog);
-      this.stopwatchService.stopTimer()
-    });
+    this.stopwatchService.stopTimer();
   }
 
   resume() {
