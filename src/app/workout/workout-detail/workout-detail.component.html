@@ -21,11 +21,11 @@
   </ion-item>
   <ion-item *ngIf="'EMOM'=== workoutDetail?.title" class="workout-items" lines="full">
     <b slot="start">Every</b>
-    <p fill="outline" slot="end">ev</p>
+    <p fill="outline" slot="end">{{workoutDetail?.rounds}}</p>
   </ion-item>
   <ion-item *ngIf="'EMOM'=== workoutDetail?.title" class="workout-items" lines="full">
     <b slot="start">For</b>
-    <p fill="outline" slot="end">for</p>
+    <p fill="outline" slot="end">{{workoutDetail?.workoutTime}}</p>
   </ion-item>
   <ion-item *ngIf="workoutDetail?.rounds" class="workout-items" lines="full">
     <b slot="start">Rounds</b>

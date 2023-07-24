@@ -8,15 +8,17 @@ import { IntervalId } from 'src/app/shared-module/Models/interval-id.enum';
 import { Storage } from '@ionic/storage'
 import { Router } from '@angular/router';
 import { IntervalAll } from 'src/app/shared-module/Models/allInterval.Modal';
+
 @Component({
-  selector: 'app-stopwatch',
-  templateUrl: './stopwatch.component.html',
-  styleUrls: ['./stopwatch.component.scss'],
+  selector: 'app-amrap',
+  templateUrl: './amrap.component.html',
+  styleUrls: ['./amrap.component.scss'],
 })
-export class StopwatchComponent implements OnInit {
+export class AMRAPComponent implements OnInit {
   timerRange: number;
   workout: any[] = [];
   workoutDone: boolean = false;
+  intervalAll: IntervalAll
   constructor(public stopWatchService: StopwatchServiceService, private orientation: ScreenOrientation, private saveStateService: SaveStateService, private platform: Platform, private toastController: ToastController, public router: Router, private storage: Storage) {
     // this.platform.pause.subscribe(data =>
     //   this.saveState()
@@ -27,7 +29,6 @@ export class StopwatchComponent implements OnInit {
   is_landscape: boolean = false;
   laps: any[] = []
   @ViewChild('content') content: IonContent;
-  intervalAll: IntervalAll;
 
   onOrientationChange() {
     if (this.orientation.type === this.orientation.ORIENTATIONS.LANDSCAPE
@@ -54,12 +55,12 @@ export class StopwatchComponent implements OnInit {
       if (this.timerRange == timer) {
         const currentDate = new Date();
         this.intervalAll = {
-          title: 'FORTIME',
-          id: IntervalId.FORTIME,
+          title: 'AMRAP',
+          id: IntervalId.AMRAP,
           date: currentDate.getUTCDate().toString(),
           time: currentDate.getTimezoneOffset().toString(),
           round: this.laps,
-          workoutTime: this.stopWatchService.timerVal.toString()
+          workoutTime: this.stopWatchService.timerVal.toString(),
         }
         this.workout.push(this.intervalAll);
         console.log('workout', this.workout);

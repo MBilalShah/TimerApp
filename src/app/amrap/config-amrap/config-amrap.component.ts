@@ -2,11 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-configuration-component',
-  templateUrl: './configuration-component.component.html',
-  styleUrls: ['./configuration-component.component.scss'],
+  selector: 'app-config-amrap',
+  templateUrl: './config-amrap.component.html',
+  styleUrls: ['./config-amrap.component.scss'],
 })
-export class ConfigurationComponentComponent implements OnInit {
+export class ConfigAmrapComponent implements OnInit {
+
   workoutTime;
   @Input() tabName: string;
 
@@ -14,6 +15,10 @@ export class ConfigurationComponentComponent implements OnInit {
     {
       name: 'languages',
       options: [
+        {
+          text: '30 Seconds',
+          value: 30,
+        },
         {
           text: '1 Minute',
           value: 60,
@@ -87,4 +92,5 @@ export class ConfigurationComponentComponent implements OnInit {
   onBack() {
     this.modalController.dismiss();
   }
+
 }

@@ -7,6 +7,8 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { Subscription } from 'rxjs';
 import { SaveStateService } from 'src/app/shared-module/services/save-state.service';
 import { AlertController, ToastController } from '@ionic/angular';
+import { IntervalTypes } from 'src/app/shared-module/Models/intervalType.enum';
+import { IntervalAll } from 'src/app/shared-module/Models/allInterval.Modal';
 
 @Component({
   selector: 'app-interval-timer',
@@ -16,8 +18,6 @@ import { AlertController, ToastController } from '@ionic/angular';
 export class IntervalTimerComponent implements OnInit {
 
   constructor(public stopwatchService: StopwatchServiceService, private acRoute: ActivatedRoute, private storage: Storage, private orientation: ScreenOrientation, private saveStateService: SaveStateService, private ngZone: NgZone, private toastController: ToastController) {
-
-    this.getState();
   }
 
   isCompleted: boolean = false
@@ -34,11 +34,9 @@ export class IntervalTimerComponent implements OnInit {
   roundNo: number = 1;
   intervalType: IntervalType = IntervalType.workout;
   workoutLog: any[] = [];
+  intervalAll: IntervalAll;
 
   ionViewDidEnter() {
-
-
-
     this.stopwatchService.initializeFiles()
     if (!this.restTime) {
       this.getState()
@@ -184,7 +182,31 @@ export class IntervalTimerComponent implements OnInit {
         });
         await toast.present();
         toast.onDidDismiss().then(() => {
-          this.workoutLog.push(this.int);
+          const startDate = new Date();
+          if (this.int.title == IntervalTypes.TABATA) {
+            this.intervalAll = {
+              title: this.int.title,
+              workoutTime: this.int.workoutTime,
+              restTime: this.restTime,
+              rounds: this.int.noOfLoops,
+              id: this.int.id,
+              date: startDate.getDate().toString(),
+              time: startDate.getTime().toString(),
+            }
+            this.workoutLog.push(this.intervalAll);
+          } else if (this.int.title == IntervalTypes.EMOM) {
+            this.intervalAll = {
+              title: this.int.title,
+              every: this.int.workoutTime,
+              for: this.int.noOfLoops,
+              id: this.int.id,
+              date: startDate.getDate().toString(),
+              time: startDate.getTime().toString(),
+            }
+            this.workoutLog.push(this.intervalAll);
+          } else {
+            this.workoutLog.push(this.int);
+          }
           console.log('this.int', this.int)
           console.log(this.workoutLog);
           this.saveStateService.saveWorkoutLog(this.workoutLog);
@@ -219,7 +241,6 @@ export class IntervalTimerComponent implements OnInit {
   }
 
   startTimer() {
-
     this.isCompleted = false
     this.intervals[this.activeIndex].type == 0 ? this.color = '#FB331A' : this.color = '#2D92F8'
     this.stopwatchService.startTimer()

@@ -1,0 +1,84 @@
+<ng-container *ngIf='!is_landscape'>
+  <ion-fab *ngIf="!workoutDone" vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-fab-button>
+  </ion-fab>
+  <br>
+  <p class='stop-watch-time' [ngClass]="{'stop-watch-time-green':workoutDone}">{{stopWatchService.timerVal * 1000 |
+    date:'mm:ss':'UTC'}}</p>
+
+  <ion-row>
+    <ion-col size='4'>
+      Round No
+    </ion-col>
+    <ion-col size='4'>
+      TIME
+    </ion-col>
+    <ion-col size='4'>
+      SPLIT
+    </ion-col>
+  </ion-row>
+
+  <ion-content #content>
+    <ion-grid class='table'>
+
+
+      <ion-row *ngFor='let lap of laps;let index=index;let first=first'>
+        <ion-col size='4'>
+          {{index+1 }}
+        </ion-col>
+        <ion-col size='4'>
+          {{lap * 1000 | date:'mm:ss':'UTC'}}
+        </ion-col>
+        <ion-col size='4'>
+          {{ !first? ((laps[index] - laps[index - 1]) * 1000 | date:'mm:ss':'UTC'): (lap[index] * 1000 |
+          date:'mm:ss':'UTC')}}
+        </ion-col>
+      </ion-row>
+
+
+    </ion-grid>
+  </ion-content>
+
+
+
+  <ion-button expand='block' size='large' *ngIf='stopWatchService.isResetted' (click)='startTimer()'>START
+    <ion-ripple-effect type="bounded"></ion-ripple-effect>
+  </ion-button>
+
+  <div *ngIf='stopWatchService.isStarted && !workoutDone'>
+    <ion-button expand='block' size='large' color='secondary' (click)='lapTime()'>Rounds Counter
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </ion-button>
+
+    <ion-button expand='block' color='primary' size='large' (click)='stopTimer()'>STOP
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </ion-button>
+
+  </div>
+  <div *ngIf='workoutDone'>
+    <ion-button expand='block' color='primary' size='large' (click)='backTo()'>Back
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </ion-button>
+  </div>
+
+  <div *ngIf='stopWatchService.isStopped'>
+
+    <ion-button expand='block' color='secondary' size='large' (click)='reset()'>RESET
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </ion-button>
+
+    <ion-button expand='block' color='primary' size='large' (click)='resume()'>RESUME
+      <ion-ripple-effect type="bounded"></ion-ripple-effect>
+    </ion-button>
+
+
+  </div>
+
+</ng-container>
+
+<ng-container *ngIf='is_landscape'>
+  <ion-header (click)='lapTime()' class='stop-watch-time landscape'>
+    <span class="lapno">{{laps.length}}</span>{{stopWatchService.timerVal * 1000 | date:'mm:ss':'UTC'}}</ion-header>
+</ng-container>

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { IntervalForm } from 'src/app/shared-module/Models/Interval.Model';
+import { IntervalTypes } from 'src/app/shared-module/Models/intervalType.enum';
+import { StopwatchServiceService } from 'src/app/shared-module/services/stopwatch-service.service';
 
 @Component({
   selector: 'app-configuration',
@@ -177,7 +179,7 @@ export class ConfigurationComponent implements OnInit {
 
 
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private stopwatchService: StopwatchServiceService) { }
 
   ngOnInit() {
   }
@@ -191,6 +193,7 @@ export class ConfigurationComponent implements OnInit {
     this.modalController.dismiss(data);
   }
   onBack() {
+    this.stopwatchService.timerVal = 0;
     this.modalController.dismiss();
   }
 }

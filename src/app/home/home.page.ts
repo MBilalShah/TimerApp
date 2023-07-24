@@ -9,6 +9,8 @@ import { ModalController } from '@ionic/angular';
 import { ConfigurationComponent } from '../interval/configuration/configuration.component';
 import { ConfigurationComponentComponent } from '../stop-watch/configuration-component/configuration-component.component';
 import { StopwatchServiceService } from '../shared-module/services/stopwatch-service.service';
+import { IntervalTypes } from '../shared-module/Models/intervalType.enum';
+import { ConfigAmrapComponent } from '../amrap/config-amrap/config-amrap.component';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -44,12 +46,11 @@ export class HomePage implements OnInit {
 
   async updateFields() {
     const current_keys = await this.storage.keys()
-    const exists = current_keys.includes('intervals')
+    const exists = current_keys.includes('intervals');
     if (!exists) {
       this.storage.set('intervals', [
         { "title": "TABATA", "workoutTime": "00:00:20", "restTime": "00:00:10", "rounds": 8, "default": true, "id": IntervalId.TABATA, noOfLoops: 1, timeBetweenLoops: '00:00:00' }
-        , { "title": "EMOM", "workoutTime": "00:01:00", "restTime": "00:00:00", "rounds": 20, "default": true, "id": IntervalId.EMOM20, noOfLoops: 1, timeBetweenLoops: '00:00:00' }
-        , { "title": "AMRAP", "workoutTime": "00:00:00", "restTime": "00:00:00", "rounds": 1, "default": true, "id": IntervalId.AMRAP, noOfLoops: 1, timeBetweenLoops: '00:00:00' }
+        , { "title": "EMOM", "workoutTime": "00:01:00", "restTime": "00:00:00", "rounds": 20, "default": true, "id": IntervalId.EMOM, noOfLoops: 1, timeBetweenLoops: '00:00:00' }
       ] as IntervalForm[])
     }
     // const storageName = 'myFields';
@@ -67,17 +68,35 @@ export class HomePage implements OnInit {
   }
 
   async goTo(tabName: string) {
-    const modal = await this.modalController.create({
-      component: ConfigurationComponentComponent,
-      cssClass: 'my-custom-class',
-      componentProps: { tabName: tabName }
-    });
-    modal.present();
-    const data = await modal.onDidDismiss();
-    if (data.data) {
-      console.log('range:', data.data.workoutTime)
-      this.storage.set('range', data.data.workoutTime)
-      this.router.navigate([`/home/${tabName}`])
+    if (IntervalTypes.AMRAP == tabName) {
+      const modal = await this.modalController.create({
+        component: ConfigAmrapComponent,
+        cssClass: 'my-custom-class',
+        componentProps: { tabName: tabName }
+      });
+      modal.present();
+      const data = await modal.onDidDismiss();
+      if (data.data) {
+        console.log('range:', data.data.workoutTime)
+        this.storage.set('range', data.data.workoutTime)
+        this.router.navigate([`/home/${tabName}`])
+      }
+    }
+    else if (IntervalTypes.FORTIME == tabName) {
+      const modal = await this.modalController.create({
+        component: ConfigurationComponentComponent,
+        cssClass: 'my-custom-class',
+        componentProps: { tabName: tabName }
+      });
+      modal.present();
+      const data = await modal.onDidDismiss();
+      if (data.data) {
+        console.log('range:', data.data.workoutTime)
+        this.storage.set('range', data.data.workoutTime)
+        this.router.navigate([`/home/${tabName}`])
+      }
+    } else {
+      this.router.navigate([`/home`])
     }
   }
 

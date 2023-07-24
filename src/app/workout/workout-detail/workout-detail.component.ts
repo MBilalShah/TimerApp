@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Interval } from 'src/app/shared-module/Models/allInterval.Modal';
+import { IntervalAll } from 'src/app/shared-module/Models/allInterval.Modal';
 import { SaveStateService } from 'src/app/shared-module/services/save-state.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { SaveStateService } from 'src/app/shared-module/services/save-state.serv
   styleUrls: ['./workout-detail.component.scss'],
 })
 export class WorkoutDetailComponent implements OnInit {
-  workoutDetail: Interval;
+  workoutDetail: IntervalAll;
   id = '';
 
   constructor(private route: ActivatedRoute, private saveState: SaveStateService) { }
@@ -19,6 +19,7 @@ export class WorkoutDetailComponent implements OnInit {
     });
     const workoutLog = await this.saveState.getWorkoutLog();
     this.workoutDetail = workoutLog.find(obj => obj.id == this.id);
+    console.log('workout logs detail', this.workoutDetail)
   }
 
 }

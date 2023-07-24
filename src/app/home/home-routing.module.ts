@@ -12,8 +12,12 @@ const routes: Routes = [
     loadChildren: () => import('./../clock/clock.module').then(m => m.ClockModule),
   },
   {
-    path: 'stopwatch',
+    path: 'FORTIME',
     loadChildren: () => import('./../stop-watch/stop-watch.module').then(m => m.StopWatchModule),
+  },
+  {
+    path: 'AMRAP',
+    loadChildren: () => import('./../amrap/amrap.module').then(m => m.AmrapModule),
   },
   {
     path: 'counter',

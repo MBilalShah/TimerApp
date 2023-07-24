@@ -12,8 +12,11 @@
       <ion-icon name="speedometer-outline"></ion-icon>
       <ion-label>Counter</ion-label>
     </ion-button> -->
-    <ion-button class="for-time" shape="round" (click)='goTo("stopwatch")'>
+    <ion-button class="for-time" shape="round" (click)='goTo("FORTIME")'>
       <ion-label>For Time</ion-label>
+    </ion-button>
+    <ion-button class="for-time" shape="round" (click)='goTo("AMRAP")'>
+      <ion-label>AMRAP</ion-label>
     </ion-button>
     <ion-button (click)="openInterval(interval)" *ngFor="let interval of intervals;let i = index"
       [ngClass]="{ 'first': i === 0 ,'second': i === 1 , 'third': i === 2 , 'fourth': i === 3 , 'fivth': i === 4}"

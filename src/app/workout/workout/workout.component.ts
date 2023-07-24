@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Interval } from 'src/app/shared-module/Models/allInterval.Modal';
+import { IntervalAll } from 'src/app/shared-module/Models/allInterval.Modal';
 import { SaveStateService } from 'src/app/shared-module/services/save-state.service';
 @Component({
   selector: 'app-workout',
@@ -10,11 +10,12 @@ import { SaveStateService } from 'src/app/shared-module/services/save-state.serv
 export class WorkoutComponent implements OnInit {
   search: boolean = false;
   constructor(public router: Router, private saveState: SaveStateService) { }
-  workout: Interval[];
-  filteredWorkout: Interval[];
+  workout: IntervalAll[];
+  filteredWorkout: IntervalAll[];
   async ngOnInit() {
     try {
       this.workout = await this.saveState.getWorkoutLog();
+      console.log('workout logs', this.workout)
       this.filterWorkout('');
     } catch (error) {
       console.error('Error loading workout data:', error);
