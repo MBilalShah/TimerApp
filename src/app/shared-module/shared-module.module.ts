@@ -4,11 +4,12 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { TimeshowPipe } from './pipes/timeshow.pipe';
 import { NumbersOnlyDirective } from './directives/numbers-only.directive';
 import { FilterPipe } from './pipes/filter.pipe';
+import { SecondsToTimePipe } from './pipes/seconds-to-time.pipe';
 
 
 
 @NgModule({
-  declarations: [TimeshowPipe, NumbersOnlyDirective, FilterPipe],
+  declarations: [TimeshowPipe, NumbersOnlyDirective, FilterPipe, SecondsToTimePipe],
   imports: [
     CommonModule,
     NgCircleProgressModule.forRoot({
@@ -23,6 +24,6 @@ import { FilterPipe } from './pipes/filter.pipe';
       renderOnClick: false
     }),
   ],
-  exports: [TimeshowPipe, NumbersOnlyDirective, FilterPipe]
+  exports: [TimeshowPipe, NumbersOnlyDirective, FilterPipe, SecondsToTimePipe]
 })
 export class SharedModuleModule { }

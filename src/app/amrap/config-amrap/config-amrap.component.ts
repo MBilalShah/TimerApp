@@ -77,7 +77,8 @@ export class ConfigAmrapComponent implements OnInit {
 
 
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController) {
+   }
 
   ngOnInit() {
     console.log(this.tabName)

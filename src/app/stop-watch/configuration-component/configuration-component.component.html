@@ -7,10 +7,10 @@
 <ion-content>
   <ion-item class="workout-items" lines="full">
     <ion-label>Time cap</ion-label>
-    <ion-button class="value-items" *ngIf="workoutTime" fill="outline" slot="end" id="open-picker1">
+    <ion-button class="value-items" *ngIf="workoutTime" fill="outline" slot="end">
       <p>{{workoutTime}}</p>
     </ion-button>
-    <ion-button class="value-items" *ngIf="!workoutTime" slot="end" id="open-picker1">
+    <ion-button class="value-items" slot="end" id="open-picker1">
       Set time
     </ion-button>
     <ion-picker trigger="open-picker1" [columns]="workoutTimes" [buttons]="workoutTimesButtons"></ion-picker>

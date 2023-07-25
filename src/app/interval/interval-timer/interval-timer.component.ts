@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Interval, IntervalForm, IntervalType } from 'src/app/shared-module/Models/Interval.Model';
 import { StopwatchServiceService } from 'src/app/shared-module/services/stopwatch-service.service';
@@ -17,7 +17,7 @@ import { IntervalAll } from 'src/app/shared-module/Models/allInterval.Modal';
 })
 export class IntervalTimerComponent implements OnInit {
 
-  constructor(public stopwatchService: StopwatchServiceService, private acRoute: ActivatedRoute, private storage: Storage, private orientation: ScreenOrientation, private saveStateService: SaveStateService, private ngZone: NgZone, private toastController: ToastController) {
+  constructor(public stopwatchService: StopwatchServiceService, private acRoute: ActivatedRoute, private storage: Storage, private orientation: ScreenOrientation, private saveStateService: SaveStateService, private ngZone: NgZone, private toastController: ToastController, private router: Router) {
   }
 
   isCompleted: boolean = false
@@ -182,7 +182,11 @@ export class IntervalTimerComponent implements OnInit {
         });
         await toast.present();
         toast.onDidDismiss().then(() => {
-          const startDate = new Date();
+          const currentDate = new Date();
+          const dateFormatOptions = { month: 'numeric', day: 'numeric', year: 'numeric' };
+          const formattedDate = currentDate.toLocaleDateString(undefined, dateFormatOptions as any);
+          const timeFormatOptions = { hour: '2-digit', minute: '2-digit' };
+          const formattedTime = currentDate.toLocaleTimeString(undefined, timeFormatOptions as any);
           if (this.int.title == IntervalTypes.TABATA) {
             this.intervalAll = {
               title: this.int.title,
@@ -190,8 +194,8 @@ export class IntervalTimerComponent implements OnInit {
               restTime: this.restTime,
               rounds: this.int.noOfLoops,
               id: this.int.id,
-              date: startDate.getDate().toString(),
-              time: startDate.getTime().toString(),
+              date: formattedDate,
+              time: formattedTime,
             }
             this.workoutLog.push(this.intervalAll);
           } else if (this.int.title == IntervalTypes.EMOM) {
@@ -200,8 +204,8 @@ export class IntervalTimerComponent implements OnInit {
               every: this.int.workoutTime,
               for: this.int.noOfLoops,
               id: this.int.id,
-              date: startDate.getDate().toString(),
-              time: startDate.getTime().toString(),
+              date: formattedDate,
+              time: formattedTime,
             }
             this.workoutLog.push(this.intervalAll);
           } else {
@@ -290,6 +294,10 @@ export class IntervalTimerComponent implements OnInit {
     this.stopwatchService.unloadFiles()
   }
 
+  backTo() {
+    this.stopwatchService.resetTimer()
+    this.router.navigate(['/home']);
+  }
 
 
 }

@@ -1,6 +1,6 @@
 export enum IntervalTypes {
   FORTIME = "FORTIME",
   TABATA = "TABATA",
-  EMOM = "TABATA",
+  EMOM = "EMOM",
   AMRAP = "AMRAP"
 }

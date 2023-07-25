@@ -21,6 +21,7 @@ export class StopwatchComponent implements OnInit {
     // this.platform.pause.subscribe(data =>
     //   this.saveState()
     // )
+    this.workoutDone = false;
     this.stopWatchService.resetTimer();
   }
   subscription: Subscription
@@ -48,18 +49,26 @@ export class StopwatchComponent implements OnInit {
     }
   }
   async ngOnInit() {
+    this.workoutDone = false;
     this.workout = await this.storage.get('workout');
     this.timerRange = await this.storage.get('range');
     this.subscription = this.stopWatchService.timerListener.subscribe(async timer => {
       if (this.timerRange == timer) {
         const currentDate = new Date();
+        const dateFormatOptions = { month: 'numeric', day: 'numeric', year: 'numeric' };
+        const formattedDate = currentDate.toLocaleDateString(undefined, dateFormatOptions as any);
+        const timeFormatOptions = { hour: '2-digit', minute: '2-digit' };
+        const formattedTime = currentDate.toLocaleTimeString(undefined, timeFormatOptions as any);
+        const date = new Date(0);
+        date.setSeconds(this.stopWatchService.timerVal);
+        const timeString = date.toISOString().substring(11, 19);
         this.intervalAll = {
           title: 'FORTIME',
           id: IntervalId.FORTIME,
-          date: currentDate.getUTCDate().toString(),
-          time: currentDate.getTimezoneOffset().toString(),
+          date: formattedDate,
+          time: formattedTime,
           round: this.laps,
-          workoutTime: this.stopWatchService.timerVal.toString()
+          workoutTime: timeString,
         }
         this.workout.push(this.intervalAll);
         console.log('workout', this.workout);
@@ -72,12 +81,7 @@ export class StopwatchComponent implements OnInit {
             position: 'top'
           });
           await toast.present();
-          toast.onDidDismiss().then(() => {
-            this.stopWatchService.resetTimer();
-            this.stopTimer();
-            this.workoutDone = false;
-
-          });
+          this.reset()
         } else {
           this.stopTimer()
         }
@@ -133,7 +137,6 @@ export class StopwatchComponent implements OnInit {
     this.stopWatchService.resumeTimer()
   }
   reset() {
-
     this.stopWatchService.resetTimer()
     this.laps = []
     this.saveState()
@@ -148,6 +151,7 @@ export class StopwatchComponent implements OnInit {
 
   }
   backTo() {
+    this.reset();
     this.router.navigate(['/home']);
   }
 }

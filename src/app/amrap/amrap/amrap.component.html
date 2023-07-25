@@ -1,8 +1,6 @@
 <ng-container *ngIf='!is_landscape'>
   <ion-fab *ngIf="!workoutDone" vertical="top" horizontal="start" slot="fixed">
-    <ion-fab-button>
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-fab-button>
+    <ion-icon size="large" name="arrow-back" (click)="backTo()"></ion-icon>
   </ion-fab>
   <br>
   <p class='stop-watch-time' [ngClass]="{'stop-watch-time-green':workoutDone}">{{stopWatchService.timerVal * 1000 |

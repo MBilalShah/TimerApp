@@ -17,8 +17,8 @@
     <ion-item *ngFor="let item of workout ; let i =index" class="workout-items" lines="none" button detail="false"
       (click)='goTo("workout-detail",item.id)'>
       <ion-label slot="start">{{item.title}}</ion-label>
-      <p slot="start">7/13/23</p>&nbsp;
-      <p slot="start">14:29</p>
+      <p slot="start">{{item.date}}</p>&nbsp;
+      <p slot="start">{{item.time}}</p>
       <ion-icon slot="end" name="trash" color="danger" (click)="deleteWorkout(i)"></ion-icon>
     </ion-item>
   </div>
@@ -26,8 +26,8 @@
     <ion-item *ngFor="let item of filteredWorkout; let i = index" class="workout-items" lines="none" button
       detail="false" (click)='goTo("workout-detail",item.id)'>
       <ion-label slot="start">{{item.title}}</ion-label>
-      <p slot="start">7/13/23</p>&nbsp;
-      <p slot="start">14:29</p>
+      <p slot="start">{{item.date}}</p>&nbsp;
+      <p slot="start">{{item.time}}</p>
       <ion-icon slot="end" name="trash" color="danger" (click)="deleteWorkout(i)"></ion-icon>
     </ion-item>
   </div>
