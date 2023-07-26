@@ -5,7 +5,6 @@ import { LoadingController, ModalController, Platform } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { LoadingScreenComponent } from '../components/loading-screen/loading-screen.component';
-import { NgxHowlerService } from 'ngx-howler';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,10 +14,7 @@ export class StopwatchServiceService {
   bell: MediaObject;
   start_date: Date;
   constructor(private loadingContoller: LoadingController, private nativeAudio: NativeAudio, private media: Media, private modalController: ModalController,
-    private platform: Platform, private howler: NgxHowlerService) {
-
-
-    this.howler.loadScript('https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js');
+    private platform: Platform) {
 
     this.platform.pause.subscribe(() => {
       this.onAppPause()
