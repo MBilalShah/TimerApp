@@ -12,16 +12,12 @@ ion-content::part(background) {
   border-left: 15px solid #FB331A;
 }
 
-ion-searchbar {
-  color: black !important;
-}
+// ::ng-deep .searchbar-input.sc-ion-searchbar-md::-webkit-input-placeholder {
+//   background: #fff !important;
+//   box-shadow: 1px 1px 1px 1px #f2f2f2, 0 0px 5px 0px #f2f2f2, 0 0px 5px 0px #e6e6e6 !important;
 
-::ng-deep .searchbar-input.sc-ion-searchbar-md::-webkit-input-placeholder {
-  background: #fff !important;
-  box-shadow: 1px 1px 1px 1px #f2f2f2, 0 0px 5px 0px #f2f2f2, 0 0px 5px 0px #e6e6e6 !important;
-
-  width: 100%;
-}
+//   width: 100%;
+// }
 
 // ion-searchbar::part(input) {
 //   background: #fff !important;

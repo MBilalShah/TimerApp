@@ -127,3 +127,16 @@ ion-fab {
 .ion-page {
   color: #fff;
 }
+
+.ion-searchbar {
+  color: black !important;
+}
+
+.ion-searchbar {
+  input {
+    background: #fff !important;
+    box-shadow: 1px 1px 1px 1px #f2f2f2, 0 0px 5px 0px #f2f2f2, 0 0px 5px 0px #e6e6e6 !important;
+    color: black !important;
+    width: 100%;
+  }
+}
