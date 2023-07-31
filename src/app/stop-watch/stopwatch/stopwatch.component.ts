@@ -50,7 +50,7 @@ export class StopwatchComponent implements OnInit {
   }
   async ngOnInit() {
     this.workoutDone = false;
-    this.workout = await this.storage.get('workout');
+    this.workout = await this.saveStateService.getWorkoutLog();
     this.timerRange = await this.storage.get('range');
     this.subscription = this.stopWatchService.timerListener.subscribe(async timer => {
       if (this.timerRange == timer) {

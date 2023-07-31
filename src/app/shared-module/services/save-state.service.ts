@@ -122,8 +122,9 @@ export class SaveStateService {
   getState(screen: any) {
     return this.storage.get(screen)
   }
-  getWorkoutLog() {
-    return this.storage.get('workout');
+  async getWorkoutLog() {
+    const logs = await this.storage.get('workout')
+    return logs || [];
   }
   saveWorkoutLog(data: any[]) {
     this.storage.set('workout', data);
