@@ -168,7 +168,6 @@ export class StopwatchServiceService {
   }
   endTimer() {
     clearInterval(this.interval);
-    return true;
   }
 
   resetTimer() {

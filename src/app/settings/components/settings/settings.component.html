@@ -16,7 +16,9 @@
 
 
 </ion-list>
-
-<ion-button  size='large' expand='block'(click)='save()' >SAVE
+<ion-button *ngIf="saveCount"  size='large' expand='block'(click)='saveBack()' >Back
+  <ion-ripple-effect  type="bounded"></ion-ripple-effect>
+</ion-button>
+<ion-button *ngIf="!saveCount"  size='large' expand='block'(click)='save()' >SAVE
   <ion-ripple-effect  type="bounded"></ion-ripple-effect>
 </ion-button>

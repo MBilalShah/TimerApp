@@ -31,6 +31,10 @@ export class ConfigurationComponent implements OnInit {
           value: '3',
         },
         {
+          text: '4',
+          value: '4',
+        },
+        {
           text: '5',
           value: '5',
         },

@@ -67,39 +67,36 @@ export class HomePage implements OnInit {
 
   }
 
-  async goTo(tabName: string) {
-    if (IntervalTypes.AMRAP == tabName) {
-      const modal = await this.modalController.create({
-        component: ConfigAmrapComponent,
-        cssClass: 'my-custom-class',
-        componentProps: { tabName: tabName }
-      });
-      modal.present();
-      const data = await modal.onDidDismiss();
-      if (data.data) {
-        console.log('range:', data.data.workoutTime)
-        this.storage.set('range', data.data.workoutTime)
-        this.router.navigate([`/home/${tabName}`])
-      }
+  async gotoAmrap() {
+    this.stopWatchService.resetTimer();
+    const modal = await this.modalController.create({
+      component: ConfigAmrapComponent,
+      cssClass: 'my-custom-class',
+      componentProps: { tabName: 'AMRAP' }
+    });
+    modal.present();
+    const data = await modal.onDidDismiss();
+    if (data.data) {
+      console.log('range:', data.data.workoutTime)
+      this.storage.set('range', data.data.workoutTime)
+      this.router.navigate([`/home/AMRAP`])
     }
-    else if (IntervalTypes.FORTIME == tabName) {
-      const modal = await this.modalController.create({
-        component: ConfigurationComponentComponent,
-        cssClass: 'my-custom-class',
-        componentProps: { tabName: tabName }
-      });
-      modal.present();
-      const data = await modal.onDidDismiss();
-      if (data.data) {
-        console.log('range:', data.data.workoutTime)
-        this.storage.set('range', data.data.workoutTime)
-        this.router.navigate([`/home/${tabName}`])
-      }
-    } else {
-      this.router.navigate([`/home`])
+
+  }
+  async gotToFortime() {
+    const modal = await this.modalController.create({
+      component: ConfigurationComponentComponent,
+      cssClass: 'my-custom-class',
+      componentProps: { tabName: 'FORTIME' }
+    });
+    modal.present();
+    const data = await modal.onDidDismiss();
+    if (data.data) {
+      console.log('range:', data.data.workoutTime)
+      this.storage.set('range', data.data.workoutTime)
+      this.router.navigate([`/home/FORTIME`])
     }
   }
-
   goToWorkout(tabName: string) {
     this.router.navigate([`/home/${tabName}`])
   }
@@ -138,8 +135,6 @@ export class HomePage implements OnInit {
       interval.restTime = restTime;
       this.storage.set("intervals", this.intervals)
       this.router.navigate([`home/interval/interval-timer/${interval.id}`])
-    } else {
-      window.location.reload();
     }
   }
 }

@@ -54,7 +54,7 @@ export class AMRAPComponent implements OnInit {
     this.workout = await this.storage.get('workout');
     this.timerRange = await this.storage.get('range');
     this.subscription = this.stopWatchService.timerListener.subscribe(async timer => {
-      if (this.timerRange == timer) {
+      if (this.timerRange === timer) {
         const currentDate = new Date();
         const dateFormatOptions = { month: 'numeric', day: 'numeric', year: 'numeric' };
         const formattedDate = currentDate.toLocaleDateString(undefined, dateFormatOptions as any);
@@ -74,18 +74,17 @@ export class AMRAPComponent implements OnInit {
         this.workout.push(this.intervalAll);
         console.log('workout', this.workout);
         this.saveStateService.saveWorkoutLog(this.workout);
-        if (this.stopWatchService.endTimer()) {
-          this.workoutDone = true;
-          const toast = await this.toastController.create({
-            message: 'Workout Done and Saved!',
-            duration: 3000,
-            position: 'top'
-          });
-          await toast.present();
-          this.reset();
-        } else {
-          this.stopTimer()
-        }
+
+        this.workoutDone = true;
+        const toast = await this.toastController.create({
+          message: 'Workout Done and Saved!',
+          duration: 3000,
+          position: 'top'
+        });
+        await toast.present();
+        this.workoutDone = true;
+        this.stopWatchService.endTimer()
+        this.reset()
       }
     })
     this.onOrientationChange()
@@ -144,8 +143,9 @@ export class AMRAPComponent implements OnInit {
     this.saveState()
   }
   ionViewDidLeave() {
-    //this.subscription.unsubscribe()
-    this.saveState()
+    this.workoutDone = false;
+    this.subscription.unsubscribe()
+    // this.saveState()
     this.stopWatchService.stopTimer()
     this.stopWatchService.resetTimer()
     this.laps = []

@@ -191,8 +191,8 @@ export class IntervalTimerComponent implements OnInit {
             this.intervalAll = {
               title: this.int.title,
               workoutTime: this.int.workoutTime,
-              restTime: this.restTime,
-              rounds: this.int.noOfLoops,
+              restTime: this.int.restTime,
+              rounds: this.int.rounds,
               id: this.int.id,
               date: formattedDate,
               time: formattedTime,
@@ -202,14 +202,12 @@ export class IntervalTimerComponent implements OnInit {
             this.intervalAll = {
               title: this.int.title,
               every: this.int.workoutTime,
-              for: this.int.noOfLoops,
+              for: this.int.rounds,
               id: this.int.id,
               date: formattedDate,
               time: formattedTime,
             }
             this.workoutLog.push(this.intervalAll);
-          } else {
-            this.workoutLog.push(this.int);
           }
           console.log('this.int', this.int)
           console.log(this.workoutLog);
