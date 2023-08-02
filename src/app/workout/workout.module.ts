@@ -7,6 +7,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { WorkoutDetailComponent } from './workout-detail/workout-detail.component';
 import { SharedModuleModule } from '../shared-module/shared-module.module';
 import { FormsModule } from '@angular/forms';
+import { ClipboardModule } from 'ngx-clipboard';
 @NgModule({
   declarations: [
     WorkoutComponent,
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     WorkoutRoutingModule,
     IonicModule,
     SharedModuleModule,
-    FormsModule
+    FormsModule,
+    ClipboardModule
   ],
   providers: [ScreenOrientation]
 })

@@ -22,7 +22,7 @@ export class WorkoutComponent implements OnInit {
     }
   }
 
-  goTo(tabName: string, id: string) {
+  goTo(tabName: string, id: number) {
     this.router.navigate(['/home/workout', tabName], { queryParams: { id: id } });
   }
 

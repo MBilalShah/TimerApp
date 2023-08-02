@@ -55,7 +55,6 @@ export class StopwatchComponent implements OnInit {
     debugger
     this.subscription = this.stopWatchService.timerListener.subscribe(async timer => {
       if (this.timerRange === timer) {
-        debugger
         const currentDate = new Date();
         const dateFormatOptions = { month: 'numeric', day: 'numeric', year: 'numeric' };
         const formattedDate = currentDate.toLocaleDateString(undefined, dateFormatOptions as any);
@@ -72,6 +71,7 @@ export class StopwatchComponent implements OnInit {
           round: this.laps,
           workoutTime: timeString,
         }
+        debugger
         this.workout.push(this.intervalAll);
         this.saveStateService.saveWorkoutLog(this.workout);
         const toast = await this.toastController.create({

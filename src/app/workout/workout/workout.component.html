@@ -15,7 +15,7 @@
   </ion-item>
   <div *ngIf="!filteredWorkout?.length && !search">
     <ion-item *ngFor="let item of workout ; let i =index" class="workout-items" lines="none" button detail="false"
-      (click)='goTo("workout-detail",item.id)'>
+      (click)='goTo("workout-detail",i)'>
       <ion-label slot="start">{{item.title}}</ion-label>
       <p slot="start">{{item.date}}</p>&nbsp;
       <p slot="start">{{item.time}}</p>
@@ -24,7 +24,7 @@
   </div>
   <div *ngIf="filteredWorkout?.length">
     <ion-item *ngFor="let item of filteredWorkout; let i = index" class="workout-items" lines="none" button
-      detail="false" (click)='goTo("workout-detail",item.id)'>
+      detail="false" (click)='goTo("workout-detail",i)'>
       <ion-label slot="start">{{item.title}}</ion-label>
       <p slot="start">{{item.date}}</p>&nbsp;
       <p slot="start">{{item.time}}</p>

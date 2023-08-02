@@ -4,10 +4,8 @@
   </ion-buttons>
   <ion-title>{{workoutDetail?.title}}</ion-title>
   <ion-buttons slot="primary">
-    <ion-button>
-      <ion-icon slot="start" name="download"></ion-icon>
-      <ion-icon slot="end" name="copy"></ion-icon>
-    </ion-button>
+    <ion-icon slot="start" style="cursor: pointer" name="download" (click)="downloadPdf()"></ion-icon>
+    <ion-icon slot="end" style="cursor: pointer" name="copy" (click)="clickBoard()"></ion-icon>
   </ion-buttons>
 </ion-toolbar>
 <ion-content>
