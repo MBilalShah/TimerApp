@@ -52,7 +52,6 @@ export class StopwatchComponent implements OnInit {
     this.workoutDone = false;
     this.workout = await this.saveStateService.getWorkoutLog();
     this.timerRange = await this.storage.get('range');
-    debugger
     this.subscription = this.stopWatchService.timerListener.subscribe(async timer => {
       if (this.timerRange === timer) {
         const currentDate = new Date();
@@ -71,7 +70,6 @@ export class StopwatchComponent implements OnInit {
           round: this.laps,
           workoutTime: timeString,
         }
-        debugger
         this.workout.push(this.intervalAll);
         this.saveStateService.saveWorkoutLog(this.workout);
         const toast = await this.toastController.create({
